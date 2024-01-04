@@ -13,6 +13,7 @@ const SuperQuality = () => {
           <span className='text-coral-red'> Super </span>
           <span className='text-coral-red'>Quality </span> Shoes
         </h2>
+        <p className="mt-4 lg:max-w-lg info-text"></p>
       <Button label='View Details'
       />
       </div>
