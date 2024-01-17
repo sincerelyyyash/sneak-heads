@@ -22,7 +22,29 @@ const productSchema = new Schema({
   price: {
     type: Number,
     required: true
-  }
+  },
+  imgURL: [{
+    type: String,
+    required: true
+  }],
+  reviews: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    rating: {
+      type: Number,
+      required: true
+    },
+    feedback: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
 }, {
   timestamps: true
 })
