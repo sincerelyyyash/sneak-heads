@@ -3,6 +3,7 @@ import { ApiError } from "../utils/apiError.js";
 import {User} from "../models/user.model.js"
 import {ApiResponse} from "../utils/apiResponse.js"
 import zod from "zod";
+import jwt from "jsonwebtoken";
 
 const registerBody = zod.object({
     email: zod.string().email(),
@@ -139,6 +140,43 @@ const logoutUser = asyncHandler(async(req, res)=>{
     .json(new ApiResponse(200, {}, "User logged out"))
 })
 
+const refreshAccessToken = asyncHandler(async(req,res)=>{
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+
+    if(incomingRefreshToken){
+        throw new ApiError(401, "Unauthorised request")
+    }
+
+   try {
+     const decodedToken=  jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
+ 
+     const user = await User.findById(decodedToken?._id)
+     if(!user){
+         throw new ApiError(401, "Invalid refresh Token")
+     }
+ 
+     if(incomingRefreshToken !== user?.refreshToken){
+         throw new ApiError(401, "Refresh token expired or used")
+     }
+ 
+     const options ={
+         httpOnly: true,
+         secure: true
+     }
+ 
+     const {accessToken, newRefreshToken} = await generateAccessAndRefreshToken(user._id)
+ 
+     return res.status(200)
+     .cookie("accessToken", accessToken, options)
+     .cookie("refreshToken", newRefreshToken, options)
+     .json(
+         new ApiResponse(200, {accessToken, newRefreshToken}, "Access token renewed")
+     )
+   } catch (error) {
+        throw new ApiError(401, error?.message ||  "Invalid refresh token")
+   }
+})
 
 
-export {registerUser, loginUser, logoutUser}
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken}
