@@ -75,7 +75,7 @@ const registerUser = asyncHandler(async (req, res)=>{
 const loginUser = asyncHandler(async (req,res)=>{
     const {email,password} = req.body;
 
-    const { success } = loginBodyBody.safeParse(req.body)
+    const { success } = loginBody.safeParse(req.body)
     if(!success){
         return res.status(411).json({
             message: "Invalid Inputs"
