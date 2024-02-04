@@ -27,3 +27,13 @@ export const verifyJWT = asyncHandler (async(req, res, next) =>{
         throw new ApiError(401, error?.message || "Invalid Access Token")
     }
 })
+
+export const isAdmin = asyncHandler(async(req,res, next)=>{
+    const user = await User.findById(req.user._id)
+    
+    if(!(user.role === 'admin')){
+        throw new ApiError(401, "Not allowed! Admin Only")
+    }
+
+    next()
+})
