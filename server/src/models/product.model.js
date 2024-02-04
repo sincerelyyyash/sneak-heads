@@ -17,7 +17,8 @@ const productSchema = new Schema({
   },
   category: {
     type: String,
-    required: true
+    required: true,
+    default: "Sneaker"
   },
   price: {
     type: Number,
