@@ -4,7 +4,7 @@ import { ApiResponse } from '../utils/apiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js'
 import zod from 'zod';
 
-const addProductBody = zod.object({
+const productBody = zod.object({
     name: zod.string(),
     desciption: zod.string(),
     category: zod.string(),
@@ -16,7 +16,7 @@ const addProductBody = zod.object({
 const addProduct = asyncHandler(async(req,res)=>{
     const {name, description, category, price, imgURL} = req.body;
 
-    const {success} = addProductBody.safeParse(req.body)
+    const {success} = productBody.safeParse(req.body)
     if(!success){
         throw new ApiError(411, "Invalid Input")
     }
@@ -51,6 +51,12 @@ const addProduct = asyncHandler(async(req,res)=>{
 
 const modifyProduct = asyncHandler(async(req,res)=>{
     const {name, desciption, category, price, imgURL} = req.body;
+
+    const {success} = productBody.safeParse(req.body)
+    if(!success){
+        throw new ApiError(411, "Invalid Input")
+    }
+
     const product = await Product.findByIdAndUpdate(
         req.product?._id,
         {
