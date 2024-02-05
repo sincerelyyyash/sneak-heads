@@ -49,4 +49,53 @@ const addProduct = asyncHandler(async(req,res)=>{
 })
 
 
-export {addProduct}
+const modifyProduct = asyncHandler(async(req,res)=>{
+    const {name, desciption, category, price, imgURL} = req.body;
+    const product = await Product.findByIdAndUpdate(
+        req.product?._id,
+        {
+            $set:{
+                name: name,
+                description: desciption,
+                category: category,
+                price: price,
+                imgURL: imgURL
+            }
+        }
+        )
+
+        return res
+        .status(200)
+        .json(new ApiResponse(200, product,"Product modified successfully"))
+
+})
+
+const getProduct = asyncHandler(async(req, res)=>{
+    return res.status(200)
+    .json(new ApiResponse(200, req.product, "Product details fetched successfully"))
+})
+
+const bulkProduct = asyncHandler( async (req, res)=>{
+    const filter = req.query.filter || "";
+
+    const product = await Product.find({
+        $or: [{
+            name: {
+                '$regex' : filter
+            }
+        },
+    ]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            _id: user._id
+        }))
+    })
+})
+
+
+export {addProduct, modifyProduct, getProduct, bulkProduct}
