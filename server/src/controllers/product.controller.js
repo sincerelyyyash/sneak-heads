@@ -3,6 +3,7 @@ import { ApiError } from '../utils/apiError';
 import { ApiResponse } from '../utils/apiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js'
 import zod from 'zod';
+import { uploadCloudinary } from '../utils/cloudinary.js';
 
 const productBody = zod.object({
     name: zod.string(),
@@ -14,7 +15,7 @@ const productBody = zod.object({
 
 
 const addProduct = asyncHandler(async(req,res)=>{
-    const {name, description, category, price, imgURL} = req.body;
+    const {name, description, category, price,} = req.body;
 
     const {success} = productBody.safeParse(req.body)
     if(!success){
@@ -28,11 +29,24 @@ const addProduct = asyncHandler(async(req,res)=>{
         throw new ApiError(400,"All fields are required")
     }
 
+    const productBannerLocalPath = req.files?.productBanner[0]?.path;
+
+    if (!productBannerLocalPath) {
+        throw new ApiError(400, "Product image required.")
+        
+    } 
+    const productBanner = await uploadCloudinary(productBannerLocalPath)
+    
+    if(!productBanner){
+        throw new ApiError(400,"Product image is required")
+    }
+
+
     const product = await Product.create({
         name,
         description,
         category,
-        imgURL,
+        imgURL: productBanner.url,
     });
 
     const createdProduct = await Product.findById(product._id)
@@ -50,12 +64,20 @@ const addProduct = asyncHandler(async(req,res)=>{
 
 
 const modifyProduct = asyncHandler(async(req,res)=>{
-    const {name, desciption, category, price, imgURL} = req.body;
+    const {name, desciption, category, price} = req.body;
 
     const {success} = productBody.safeParse(req.body)
     if(!success){
         throw new ApiError(411, "Invalid Input")
     }
+
+    const productBannerLocalPath = req.files?.productBanner[0]?.path;
+
+    
+    const productBanner = await uploadCloudinary(productBannerLocalPath)
+    
+   
+
 
     const product = await Product.findByIdAndUpdate(
         req.product?._id,
@@ -65,7 +87,7 @@ const modifyProduct = asyncHandler(async(req,res)=>{
                 description: desciption,
                 category: category,
                 price: price,
-                imgURL: imgURL
+                imgURL: productBanner?.url
             }
         }
         )
