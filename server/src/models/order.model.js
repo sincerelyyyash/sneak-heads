@@ -23,22 +23,6 @@ const orderSchema = new mongoose.Schema({
             type: Number,
             required: true
         },
-        tax:{
-            type: Number,
-            required: true
-        },
-        shippingCharge:{
-            type: Number,
-            required: true
-        },
-        discount:{
-            type: Number,
-            required: true
-        },
-        total:{
-            type: Number,
-            required: true
-        },
         status:{
             enum: ["Processing", "Shipped", "Delivered"],
             default: "Processing"
@@ -62,7 +46,23 @@ const orderSchema = new mongoose.Schema({
     subtotal:{
         type: number,
         required: true,
-    }
+    },
+    tax:{
+        type: Number,
+        required: true
+    },
+    shippingCharge:{
+        type: Number,
+        required: true
+    },
+    discount:{
+        type: Number,
+        required: true
+    },
+    total:{
+        type: Number,
+        required: true
+    },
 },{timestamps: true})
 
 export const Order = mongoose.model("Order", orderSchema)
