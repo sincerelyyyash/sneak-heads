@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { number } from "zod";
 
-const schema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     shippingInfo:{
         address:{
             type: String,
@@ -43,18 +43,17 @@ const schema = new mongoose.Schema({
             enum: ["Processing", "Shipped", "Delivered"],
             default: "Processing"
         },
-        orderItems:[{
-            name: String,
-            photo: String,
-            price: Number,
-            quanity: Number,
-            productID: {
-                type: mongoose.Types.ObjectId,
-                ref: "Product"
-            }
-        }]
-
     },
+    orderItems:[{
+        name: String,
+        photo: String,
+        price: Number,
+        quanity: Number,
+        productID: {
+            type: mongoose.Types.ObjectId,
+            ref: "Product"
+        }
+    }],
     user:{
         type: String,
         ref: "User",
@@ -65,3 +64,5 @@ const schema = new mongoose.Schema({
         required: true,
     }
 },{timestamps: true})
+
+export const Order = mongoose.model("Order", orderSchema)
