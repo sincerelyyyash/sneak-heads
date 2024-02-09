@@ -25,7 +25,7 @@ const orderSchema = new mongoose.Schema({
         },
         status:{
             enum: ["Processing", "Shipped", "Delivered"],
-            default: "Processing"
+            default: ["Processing"],
         },
     },
     orderItems:[{
@@ -44,7 +44,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
     },
     subtotal:{
-        type: number,
+        type: Number,
         required: true,
     },
     tax:{

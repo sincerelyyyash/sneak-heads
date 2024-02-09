@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -19,6 +20,7 @@ const userSchema = new Schema({
     required: [true, 'Password is required']
   },
   role:{
+    type: String,
     required: true,
     enum: ['admin','user'],
     default: "user",

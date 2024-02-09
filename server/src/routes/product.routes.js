@@ -1,5 +1,5 @@
 import { Router} from "express";
-import { addProduct, bulkProduct, getProduct, modifyProduct } from "../controllers/product.controller";
+import { addProduct, bulkProduct, getProduct, modifyProduct } from "../controllers/product.controller.js";
 import { isAdmin } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
 

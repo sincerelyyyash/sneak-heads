@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const cartSchema = new Schema({
   owner: {
-    type: ObjectID,
+    type: Schema.Types.ObjectID,
     required: true,
     ref: 'User'
   },
