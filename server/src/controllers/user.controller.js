@@ -82,11 +82,11 @@ const loginUser = asyncHandler(async (req,res)=>{
         })
     }
 
-    if(!email || password){
+    if(!email || !password){
         throw new ApiError(400,"Email and password is required")
     }
 
-    const user = await User.findOne(email)
+    const user = await User.findOne({email})
 
     if(!user){
         throw new ApiError(404, "User does not exist")
@@ -100,7 +100,9 @@ const loginUser = asyncHandler(async (req,res)=>{
 
     const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
 
-    const loggedInUser = await User.findById(user._id).select("-password - refreshToken")
+    // const loggedInUser = await User.findById(user._id).select("-password - refreshToken")
+    const loggedInUser = await User.findById(user._id).select("email fullname role")
+
 
     const options = {
         httpOnly: true,
