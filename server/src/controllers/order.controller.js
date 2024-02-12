@@ -4,6 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import zod from "zod";
 import { Order } from "../models/order.model.js";
 import {ApiResponse} from "../utils/apiResponse.js"
+import { reduceStock } from "../utils/reduceStock.js";
 
 
 const newOrderBody = zod.object({
@@ -26,7 +27,7 @@ const newOrderBody = zod.object({
         photo: zod.string(),
         price: zod.number(),
         quantity: zod.number(),
-        productId: zod.string(),
+        // productId: zod.string(),
     }
 })
 
@@ -63,7 +64,9 @@ const newOrder = asyncHandler(async(req, res)=>{
             total,
         });
 
+        await reduceStock(orderItems);
 
+        i
         return res.status(201).json(
             new ApiResponse(200, "Order created Successfully")
         )

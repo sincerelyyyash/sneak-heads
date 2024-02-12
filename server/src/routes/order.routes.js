@@ -6,7 +6,7 @@ import { newOrder } from "../controllers/order.controller.js";
 const router = Router();
 
 
-router.route("/new-order").post(isAdmin, newOrder)
+router.route("/new-order").post(newOrder)
 
 
 

@@ -24,10 +24,14 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
-  imgURL: [{
+  stock: {
+    type: Number,
+    required: true,
+  },
+  imgURL: {
     type: String,
     required: true
-  }],},{
+  },},{
   timestamps: true
 })
 
