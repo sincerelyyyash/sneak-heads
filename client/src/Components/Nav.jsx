@@ -3,13 +3,14 @@ import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
 import { navLinks } from '../Constants'
 import { useNavigate } from 'react-router-dom';
-
-
 import Signin from '../Pages/Signin';
+
 
 const Nav = () => {
 
   const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem('accessToken')
+
 
   return (
     <header className='padding-x
@@ -37,15 +38,19 @@ const Nav = () => {
               </a>
             </li>
           ))}
-         <button 
+         
+        </ul>
+        {isLoggedIn ? (<p className='font-montserrat
+              leading-normal
+              text-lg
+              text-slate-gray'>Hello, User </p>): <button 
          className='font-montserrat
          leading-normal
          text-lg
          text-slate-gray'
          onClick={()=>{
             navigate("/signin")
-        }}>Sign-In</button>
-        </ul>
+        }}>Sign-In</button>}
     
       
        

@@ -1,28 +1,25 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { SignIn} from '../Api/UserAPi';
+import { emailAtom,passwordAtom } from '../Recoil/userAtoms';
 
 function Signin() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useRecoilState(emailAtom);
+    const [password, setPassword] = useRecoilState(passwordAtom);
     const navigate = useNavigate();
 
 
-    // const handleSignIn = async () => {
-    //     try {
-    //       const requestBody = {
-    //         username,
-    //         password
-    //       };
+    const handleSignIn = async(email, fullname, password) =>{
+        SignIn(email, fullname, password)
+
+        if(!SignIn){
+            console.log("Error signing up")
+        }
+        navigate("/")
       
-    //       const response = await axios.post("http://localhost:3000/api/v1/user/signin", requestBody);
-      
-    //       localStorage.setItem("token", response.data.token);
-    //       navigate("/dashboard");
-    //     } catch (error) {
-    //       console.error('Error signing in:', error);
-    //     }
-    //   };
+    }
 
   return (
     <div className='flex justify-center'>
@@ -40,7 +37,7 @@ function Signin() {
         <p className='mt-5 font-bold text-lg'>Email</p>
         <input variant="outlined" type='email' name="email" id="email" placeholder='tony@example.com'
             onChange={(e)=>{
-                setUsername(e.target.value);
+                setEmail(e.target.value);
             }}
             className='w-full border border-gray-300 h-10  mt-3 rounded-lg p-2'
         />
@@ -54,7 +51,9 @@ function Signin() {
         />
 
         <button
-        // onClick={handleSignIn}
+        onClick={()=>{
+            handleSignIn(email,password)
+        }}
         className='mt-5 bg-coral-red text-white border-coral-red font-bold text-xl h-12 rounded-lg'
         >Sign In</button>
         <div className='flex flex-row mt-4 justify-center gap-1'>
