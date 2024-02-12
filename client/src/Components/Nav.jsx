@@ -2,9 +2,15 @@ import React from 'react'
 import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
 import { navLinks } from '../Constants'
+import { useNavigate } from 'react-router-dom';
 
+
+import Signin from '../Pages/Signin';
 
 const Nav = () => {
+
+  const navigate = useNavigate();
+
   return (
     <header className='padding-x
     py-8 absolute z-10 w-full'>
@@ -31,7 +37,18 @@ const Nav = () => {
               </a>
             </li>
           ))}
+         <button 
+         className='font-montserrat
+         leading-normal
+         text-lg
+         text-slate-gray'
+         onClick={()=>{
+            navigate("/signin")
+        }}>Sign-In</button>
         </ul>
+    
+      
+       
         <div className='hidden 
         max-lg:block'>
           <img src={hamburger} alt='hamburger icon' width={25} height={25} />
