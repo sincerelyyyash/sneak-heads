@@ -1,5 +1,7 @@
 import {atom} from 'recoil';
 
+
+// user Login & Sign Up field Atoms
 export const fullnameAtom = atom({
     key: "fullnameAtom",
     default: ""
