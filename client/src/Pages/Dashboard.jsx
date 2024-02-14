@@ -1,11 +1,11 @@
 import React from 'react'
-import DashboardCard from '../Components/DashboardCard'
+import RevenueCard from '../Components/RevenueCard'
 
 function Dashboard() {
   return (
     <div>
         <h3 className='font-semibold p-5 text-2xl'>Dashboard</h3>
-        <DashboardCard title={"Revenue"}/>
+        <RevenueCard title={"Revenue"} value={"₹245600"} percentage={"76%"}/>
 
 
 
