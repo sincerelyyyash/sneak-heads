@@ -1,6 +1,6 @@
 import React from 'react';
 
-function DashboardCard({ title, value, percentage }) {
+function OverviewCard({ title, value, percentage }) {
   return (
       <div className='mt-5 px-5 bg-white w-72 h-28 rounded-lg shadow-3xl flex items-center justify-between'>
         <div className='p-4'>
@@ -16,4 +16,4 @@ function DashboardCard({ title, value, percentage }) {
   );
 }
 
-export default DashboardCard;
+export default OverviewCard;

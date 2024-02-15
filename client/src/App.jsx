@@ -4,7 +4,7 @@ import Signin from "./Pages/Signin";
 import Homepage from "./Pages/Homepage";
 import Signup from "./Pages/Signup";
 import { RecoilRoot } from "recoil";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/Overview";
 
 const App = () => (
   <RecoilRoot>
