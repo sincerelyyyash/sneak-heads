@@ -1,14 +1,13 @@
 import React from 'react'
 import SideBar from '../Components/SideBar'
-import Overview from './Overview'
 
-function Dashboard() {
+const Transaction = () => {
   return (
     <div className='grid grid-cols-2 gap-8 h-screen bg-gray-100'>
         <SideBar/>
-        <main>Dashboard</main>
+        <main>Transaction</main>
     </div>
   )
 }
 
-export default Dashboard
+export default Transaction

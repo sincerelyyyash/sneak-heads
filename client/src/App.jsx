@@ -1,22 +1,36 @@
 
 import { BrowserRouter, Route, Routes }from "react-router-dom";
-import Signin from "./Pages/Signin";
-import Homepage from "./Pages/Homepage";
-import Signup from "./Pages/Signup";
 import { RecoilRoot } from "recoil";
-import Overview from "./Pages/Overview";
-import Dashboard from "./Pages/Dashboard";
+import { Suspense, lazy } from "react";
+import Loader from "./Components/loader";
+
+
+
+const Signin = lazy(()=>import("./Pages/Signin"));
+const Homepage = lazy(()=> import("./Pages/Homepage"));
+const Signup = lazy(()=> import("./Pages/Signup"));
+const Overview = lazy(()=>import("./Pages/Overview"));
+const Dashboard = lazy(()=>import( "./Pages/Dashboard"));
+const Products  = lazy(()=>import("./Pages/Products"));
+const Customer  = lazy(()=>import("./Pages/Customer"));
+const Transaction  = lazy(()=>import("./Pages/Transaction"));
+
 
 const App = () => (
   <RecoilRoot>
   <BrowserRouter>
+  <Suspense fallback={<Loader/>}>
   <Routes>
     <Route path="/" element={<Homepage/>}/>
     <Route path="/signin" element={<Signin/>}/>
     <Route path="/signup" element={<Signup/>}/>
-    <Route path="/dashboard" element={<Dashboard/>}/>
-    <Route path="/overview" element={<Overview/>}/>
+    <Route path="/admin/dashboard" element={<Dashboard/>}/>
+    <Route path="/admin/products" element={<Products/>}/>
+    <Route path="/admin/customer" element={<Customer/>}/>
+    <Route path="/admin/transaction" element={<Transaction/>}/>
   </Routes>
+  </Suspense>
+  
   </BrowserRouter>
   </RecoilRoot>
 )
