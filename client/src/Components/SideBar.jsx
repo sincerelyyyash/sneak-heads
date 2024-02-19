@@ -3,6 +3,11 @@ import { Link, useLocation} from 'react-router-dom'
 import { RiDashboardFill, RiShoppingBag3Fill } from "react-icons/ri";
 import { AiFillFileText } from "react-icons/ai";
 import { IoIosPeople } from "react-icons/io";
+import {
+    FaChartBar,
+    FaChartLine,
+    FaChartPie,
+  } from "react-icons/fa";
 
 
 function SideBar() {
@@ -11,7 +16,7 @@ function SideBar() {
     <aside className='w-56 bg-white p-4 z-10 
     overflow-y-auto scrollbar-hidden'>
         <h2>Logo</h2>
-        <h2 className='mt-4 text-bold italic'>Dashboard</h2>
+        <h2 className='mt-4 text-bold'>Dashboard</h2>
         <div className='m-4'>
             <ul>  
                 <ListItem 
@@ -36,6 +41,30 @@ function SideBar() {
                 url="/admin/transaction"
                 Icon={AiFillFileText}
                 text={"Transaction"}
+                />
+                
+            </ul>
+        </div>
+
+        <h2 className='mt-4 text-bold'>Analytics</h2>
+        <div className='m-4'>
+            <ul>  
+                <ListItem 
+                url="/admin/bar"
+                Icon={FaChartBar}
+                text={"Bar"}
+                />
+
+                <ListItem 
+                url="/admin/pie"
+                Icon={FaChartPie}
+                text={"Pie"}
+                />
+
+                <ListItem 
+                url="/admin/line"
+                Icon={FaChartLine}
+                text={"Line"}
                 />
                 
             </ul>
