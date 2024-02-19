@@ -11,10 +11,9 @@ function SideBar() {
     <aside className='w-56 bg-white p-4 z-10 
     overflow-y-auto scrollbar-hidden'>
         <h2>Logo</h2>
+        <h2 className='mt-4 text-bold italic'>Dashboard</h2>
         <div className='m-4'>
-            <h5>Dashboard</h5>
-            <ul>
-                
+            <ul>  
                 <ListItem 
                 url="/admin/dashboard"
                 Icon={RiDashboardFill}
@@ -51,10 +50,10 @@ const ListItem = ({ url, Icon, text }) => {
     const isActive = location.pathname.includes(url);
   
     return (
-      <li className={`flex items-center p-2 ${isActive ? 'bg-blue-100 text-blue-900 rounded-lg' : ''}`}>
+      <li className={`flex items-center p-2 ${isActive ? 'bg-blue-100 text-coral-red rounded-lg' : ''}`}>
         <Link to={url} className='flex items-center'>
           <Icon />
-          <h2 className='text-xl px-2'>{text}</h2> 
+          <h3 className=' px-2'>{text}</h3> 
         </Link>
       </li>
     );
