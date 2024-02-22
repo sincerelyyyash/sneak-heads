@@ -5,11 +5,12 @@ import OverviewCard from '../Components/OverviewCard'
 
 function Dashboard() {
   return (
-    <div className='grid grid-cols-2 gap-8 h-screen bg-gray-100'>
-        <SideBar/>
-        <main>
-     
-          <div className='flex items-center justify-evenly'>
+    <div className='flex flex-row gap-8 h-screen bg-gray-100'>
+        <SideBar className='basis-1/4'/>
+        <main >
+          <div className='flex flex-row  justify-between'>
+            <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
+            <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
             <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
           </div>
     
