@@ -3,7 +3,8 @@ import {HiTrendingUp, HiTrendingDown} from 'react-icons/hi'
 
 function OverviewCard({ title,amount, value, percentage }) {
   return (
-      <div className='mt-5 px-5 bg-white w-72 h-28 rounded-lg shadow-3xl 
+      <div className='px-8 py-8'>
+        <div className='mt-5 bg-white w-72 h-28 rounded-lg shadow-3xl 
       flex items-center justify-between'>
         <div className='p-4'>
           <h4 className='text-black text-lg italic'>{title}</h4>
@@ -20,6 +21,7 @@ function OverviewCard({ title,amount, value, percentage }) {
           }
                </div>
         </div>
+      </div>
       </div>
   );
 }

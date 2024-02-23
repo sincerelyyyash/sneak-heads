@@ -10,8 +10,8 @@ function Dashboard() {
         <main >
           <div className='flex flex-row  justify-between'>
             <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
-            <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
-            <OverviewCard title={"Revenue"} value={"₹245600"} percentage={-76}/>
+            <OverviewCard title={"Orders"} value={"₹245600"} percentage={-76}/>
+            <OverviewCard title={"Users"} value={"₹245600"} percentage={-76}/>
           </div>
     
         </main>
