@@ -1,5 +1,5 @@
 import React from 'react';
-import {HiTrendingUp, HiTrendingDown} from 'react-icons/hi'
+import {HiTrendingUp, HiTrendingDown} from 'react-icons/ri'
 
 function OverviewCard({ title,amount, value, percentage }) {
   return (

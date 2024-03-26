@@ -2,7 +2,7 @@
 import { BrowserRouter, Route, Routes }from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Suspense, lazy } from "react";
-import Loader from "./Components/loader";
+import Loader from "./Components/Loader";
 
 
 

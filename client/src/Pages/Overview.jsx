@@ -6,7 +6,7 @@ function Overview() {
   return (
     <div>
       <SideBar/>
-        <h3 className='font-semibold p-5 text-2xl'>Overview</h3>
+        <h3 className='font-semibold p-5 text-2xl text-black'>Overview</h3>
         <div className='flex items-center justify-evenly'>
             <OverviewCard title={"Revenue"} value={"₹245600"} percentage={"76%"}/>
             <OverviewCard title={"User"} value={"8"} percentage={"44%"}/>
@@ -14,6 +14,7 @@ function Overview() {
             <OverviewCard title={"Products"} value={"17"} percentage={"45%"}/>
 
         </div>
+        <h1 className='text-2xl text-coral-red'>Add Products</h1>
 
 
     </div>

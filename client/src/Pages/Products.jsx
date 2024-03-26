@@ -8,9 +8,10 @@ const Products = () => {
     <div className='flex flex-row gap-8 h-screen bg-gray-100'>
         <SideBar className='basis-1/4'/>
         <main>
+        <h1 className='text-2xl font-medium font-montserrat text-black p-5'>Products</h1>
         <div className='flex flex-row justify-between'>
         <div
-        className="mt-16 grid lg:grid-cols-3 md:grid-cols-3 
+        className="mt-4 grid lg:grid-cols-3 md:grid-cols-3 
         sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-14">
           {products.map((product)=>(
             <PopularProductCard key=

@@ -2,7 +2,7 @@ import Button from "../Components/Button"
 import { useState } from "react"
 import ShoeCard from "../Components/ShoeCard"
 import { shoes, statistics } from "../Constants"
-import { arrowRight } from "../assets/icons"
+import { logo} from "../assets/icons"
 import { bigShoe1 } from "../assets/images"
 
 const Hero = () => {
@@ -42,7 +42,7 @@ const Hero = () => {
           innovation for your active life.
         </p>
         <Button label='Shop Now'
-          iconURL={arrowRight}
+          iconURL={logo}
         />
 
         <div className="flex justify-start items-start 
