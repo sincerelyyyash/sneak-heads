@@ -1,5 +1,5 @@
 import { facebook, instagram, shieldTick, support, truckFast, twitter } from "../assets/icons";
-import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, shoe4, shoe5, shoe6, shoe7, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3 } from "../assets/images";
+import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, shoe4, shoe5, shoe6, shoe7, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3, notFoundImage } from "../assets/images";
 
 
 export const baseUrl = 'http://localhost:8000/api/v1'
@@ -33,40 +33,51 @@ export const statistics = [
 
 export const products = [
     {
-        imgURL: shoe4,
+        productId: 1,
+        imgURLs: [shoe4,shoe4,shoe4,shoe6,],
         name: "Nike Air Jordan-01",
         price: "$200.20",
+        description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance. Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance. Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
     },
     {
-        imgURL: shoe5,
+        productId: 2,
+        imgURLs: [shoe5, shoe4, shoe4, shoe6,],
         name: "Nike Air Jordan-10",
         price: "$210.20",
+        description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
+
     },
     {
-        imgURL: shoe6,
+        productId: 3,
+        imgURLs: [shoe6,shoe4,shoe5,shoe4,],
         name: "Nike Air Jordan-100",
         price: "$220.20",
+        description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
+
     },
     {
-        imgURL: shoe7,
+        productId: 4,
+        imgURLs: [shoe7,shoe4,shoe5,shoe6,],
         name: "Nike Air Jordan-001",
         price: "$230.20",
+        description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
+
     },
 ];
 
 export const services = [
     {
-        imgURL: truckFast,
+        imgURLs: truckFast,
         label: "Free shipping",
         subtext: "Enjoy seamless shopping with our complimentary shipping service."
     },
     {
-        imgURL: shieldTick,
+        imgURLs: shieldTick,
         label: "Secure Payment",
         subtext: "Experience worry-free transactions with our secure payment options."
     },
     {
-        imgURL: support,
+        imgURLs: support,
         label: "Love to help you",
         subtext: "Our dedicated team is here to assist you every step of the way."
     },
@@ -74,13 +85,13 @@ export const services = [
 
 export const reviews = [
     {
-        imgURL: customer1,
+        imgURLs: customer1,
         customerName: 'Morich Brown',
         rating: 4.5,
         feedback: "The attention to detail and the quality of the product exceeded my expectations. Highly recommended!"
     },
     {
-        imgURL: customer2,
+        imgURLs: customer2,
         customerName: 'Lota Mongeskar',
         rating: 4.5,
         feedback: "The product not only met but exceeded my expectations. I'll definitely be a returning customer!"
@@ -124,3 +135,4 @@ export const socialMedia = [
     { src: twitter, alt: "twitter logo" },
     { src: instagram, alt: "instagram logo" },
 ];
+export default notFoundImage;

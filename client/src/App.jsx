@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes }from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
+import ProductDetailsPage from "./Pages/ProductDetailsPage";
+import { ProductsPage } from "./Pages/ProductsPage";
 
 
 
@@ -21,6 +23,8 @@ const App = () => (
     <Route path="/" element={<Homepage/>}/>
     <Route path="/signin" element={<Signin/>}/>
     <Route path="/signup" element={<Signup/>}/>
+    <Route path="/products" element={<ProductsPage/>}/>
+    <Route path="products/:productId" element={<ProductDetailsPage/>}/>
   </Routes>
   </Suspense>
   </BrowserRouter>

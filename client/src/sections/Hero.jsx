@@ -4,10 +4,12 @@ import ShoeCard from "../Components/ShoeCard"
 import { shoes, statistics } from "../Constants"
 import { logo} from "../assets/icons"
 import { bigShoe1 } from "../assets/images"
+import { useNavigate } from "react-router-dom"
 
 const Hero = () => {
 
   const [bigShoeImg, setBigShoeImg] = useState(bigShoe1)
+  const navigate = useNavigate();
   return (
     <section
       id="home"
@@ -43,6 +45,9 @@ const Hero = () => {
         </p>
         <Button label='Shop Now'
           iconURL={logo}
+          onClick={()=>{
+            navigate("/products")
+          }}
         />
 
         <div className="flex justify-start items-start 
