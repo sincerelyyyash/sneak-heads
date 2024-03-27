@@ -1,15 +1,19 @@
 import React from 'react'
 import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
-import { navLinks } from '../Constants'
 import { useNavigate } from 'react-router-dom';
-import Signin from '../Pages/Signin';
+import SearchBar from './SearchBar';
+
 
 
 const Nav = () => {
 
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem('accessToken')
+  const handleSearch = (query) => {
+    // Implement your search logic here
+    console.log('Search Query:', query);
+  };
 
 
   return (
@@ -23,23 +27,31 @@ const Nav = () => {
           width={130}
           height={30} />
         </a>
+        {/* //searchbar here */}
+        <SearchBar onSearch={handleSearch} />
         <ul className='flex-1 flex justify-center items-center
         gap-16 max-lg:hidden'>
-          {navLinks.map((item)=>(
-            <li key={item.label}>
-              <a
-              href={item.href}
-              className='font-montserrat
-              leading-normal
-              text-lg
-              text-slate-gray'
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-         
-        </ul>
+          <li>
+          <button 
+         className='font-montserrat
+         leading-normal
+         text-lg
+         text-slate-gray'
+         onClick={()=>{
+            navigate("/products")
+        }}>Products</button>
+          </li>
+          <li>
+          <button 
+         className='font-montserrat
+         leading-normal
+         text-lg
+         text-slate-gray'
+         onClick={()=>{
+            navigate("/products")
+        }}>View Cart</button>
+          </li>
+          <li>
         {isLoggedIn ? (<p className='font-montserrat
               leading-normal
               text-lg
@@ -51,6 +63,8 @@ const Nav = () => {
          onClick={()=>{
             navigate("/signin")
         }}>Sign-In</button>}
+        </li>        
+        </ul>
     
       
        

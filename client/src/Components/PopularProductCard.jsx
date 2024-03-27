@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { star } from '../assets/icons';
 
-const PopularProductCard = ({ imgURL, name, price, productId }) => {
+const PopularProductCard = ({ imgURLs, name, price, productId }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const firstImage = imgURLs && imgURLs.length > 0 ? imgURLs[0] : '';
 
   return (
     <Link
@@ -12,7 +14,7 @@ const PopularProductCard = ({ imgURL, name, price, productId }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img src={imgURL} alt={name} className="w-[280px] h-[280px]" />
+      <img src={firstImage} alt={name} className="w-[280px] h-[280px]" />
       <div className="product-info">
         <div className="rating flex justify-start gap-2.5">
           <img src={star} alt="rating" width={24} height={24} />
