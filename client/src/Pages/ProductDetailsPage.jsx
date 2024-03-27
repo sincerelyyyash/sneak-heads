@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { products } from '../Constants';
 import ImageOptions from '../Components/ImageOptions';
 import Button from '../Components/Button';
-import { logo } from "../assets/icons"
 import { star } from '../assets/icons'
-import ProductNotfound from './ProductNotfound';
+import ProductNotfound from '../Components/ProductNotfound';
+import { Footer } from '../sections';
+import Nav from '../Components/Nav';
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -18,12 +19,29 @@ const ProductDetailsPage = () => {
   const { imgURLs, name, price, description } = product;
 
   const [selectedImage, setSelectedImage] = useState(imgURLs[0]);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleIncreaseQuantity = () => {
+    if (quantity < 10) {
+        setQuantity(prevQuantity => prevQuantity + 1);
+      }
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(prevQuantity => prevQuantity - 1);
+    }
+  };
 
   return (
-    <div className='m-10 p-5 flex flex-row'>
+   <div>
+    <section className='pb-12'>
+    <Nav/>
+    </section>
+     <div className='padding flex flex-row justify-center'>
       <div>
       <div>
-      <div className='w-full'>
+      <div className='w-full '>
         <img src={selectedImage} alt={name} className="w-[540px] h-[440px]" />
       </div>
       <div className="flex justify-start">
@@ -48,6 +66,17 @@ const ProductDetailsPage = () => {
         <p className='mt-4 font-montserrat
       text-gray-600' style={{ wordWrap: 'break-word', maxWidth: '580px' }}>{description}</p>
       <p className="mt-2 font-semibold font-montserrat text-coral-red text-3xl leading-normal">{price}</p>
+      <div>
+        <div>
+            <h2 className='mt-4 font-montserrat
+      text-gray-600'>Quantity: (Max- 10 per order)</h2>
+        </div>
+        <div className="flex gap-2 mt-2">
+            <button onClick={handleDecreaseQuantity} className="border border-gray-300 px-3 py-1">-</button>
+            <span className='text-2xl font-normal'>{quantity}</span>
+            <button onClick={handleIncreaseQuantity} className="border border-gray-300 px-3 py-1">+</button>
+          </div>
+      </div>
       <div className="mt-11 flex flex-wrap gap-4">
         <Button label="Add to cart"
         backgroundColor='bg-white'
@@ -58,6 +87,10 @@ const ProductDetailsPage = () => {
         </div>
       </div>
     </div>
+    <section className="padding-x padding-t pt-8 pb-8 bg-black">
+      <Footer/>
+    </section>
+   </div>
     
   );
 };
