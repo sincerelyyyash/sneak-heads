@@ -1,5 +1,5 @@
 import Button from "../Components/Button"
-import { logo } from "../assets/icons"
+import {  arrowRight } from "../assets/icons"
 import { offer } from "../assets/images"
 
 
@@ -30,7 +30,7 @@ const SpecialOffer = () => {
           short of exceptional.
         </p>
         <div className="mt-11 flex flex-wrap gap-4">
-        <Button label='Shop Now' iconURL={logo}/>
+        <Button label='Shop Now' iconURL={arrowRight}/>
         <Button label="Learn More"
         backgroundColor='bg-white'
         borderColor='border-slate-gray'

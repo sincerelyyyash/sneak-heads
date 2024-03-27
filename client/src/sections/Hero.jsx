@@ -2,7 +2,7 @@ import Button from "../Components/Button"
 import { useState } from "react"
 import ShoeCard from "../Components/ShoeCard"
 import { shoes, statistics } from "../Constants"
-import { logo} from "../assets/icons"
+import { arrowRight} from "../assets/icons"
 import { bigShoe1 } from "../assets/images"
 import { useNavigate } from "react-router-dom"
 
@@ -44,7 +44,7 @@ const Hero = () => {
           innovation for your active life.
         </p>
         <Button label='Shop Now'
-          iconURL={logo}
+          iconURL={arrowRight}
           onClick={()=>{
             navigate("/products")
           }}

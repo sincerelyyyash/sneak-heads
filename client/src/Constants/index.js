@@ -67,17 +67,17 @@ export const products = [
 
 export const services = [
     {
-        imgURLs: truckFast,
+        imgURLs: [truckFast], 
         label: "Free shipping",
         subtext: "Enjoy seamless shopping with our complimentary shipping service."
     },
     {
-        imgURLs: shieldTick,
+        imgURLs: [shieldTick], 
         label: "Secure Payment",
         subtext: "Experience worry-free transactions with our secure payment options."
     },
     {
-        imgURLs: support,
+        imgURLs: [support], 
         label: "Love to help you",
         subtext: "Our dedicated team is here to assist you every step of the way."
     },
@@ -85,13 +85,13 @@ export const services = [
 
 export const reviews = [
     {
-        imgURLs: customer1,
+        imgURL: customer1, 
         customerName: 'Morich Brown',
         rating: 4.5,
         feedback: "The attention to detail and the quality of the product exceeded my expectations. Highly recommended!"
     },
     {
-        imgURLs: customer2,
+        imgURL: customer2, 
         customerName: 'Lota Mongeskar',
         rating: 4.5,
         feedback: "The product not only met but exceeded my expectations. I'll definitely be a returning customer!"
@@ -124,7 +124,7 @@ export const footerLinks = [
     {
         title: "Get in touch",
         links: [
-            { name: "customer@nike.com", link: "mailto:customer@nike.com" },
+            { name: "customer@sneakhead.com", link: "mailto:customer@sneakhead.com" },
             { name: "+92554862354", link: "tel:+92554862354" },
         ],
     },
