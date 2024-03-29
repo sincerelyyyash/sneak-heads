@@ -28,8 +28,8 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  imgURL: {
-    type: String,
+  imgURLs: {
+    type: [String],
     required: true
   },},{
   timestamps: true

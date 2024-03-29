@@ -2,128 +2,154 @@ import {Product} from '../models/product.model.js'
 import { ApiError } from '../utils/apiError.js';
 import { ApiResponse } from '../utils/apiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js'
-import zod from 'zod';
 import { uploadCloudinary } from '../utils/cloudinary.js';
 
-const productBody = zod.object({
-    name: zod.string(),
-    desciption: zod.string(),
-    category: zod.string(),
-    price: zod.number(),
-    imgURL: zod.string(),
-})
 
+const addProduct = asyncHandler(async (req, res) => {
+    const { name, description, category, price, stock } = req.body;
+    const imgURLs = req.files?.productImages?.map((file) => file.path);
 
-const addProduct = asyncHandler(async(req,res)=>{
-    const {name, description, category, price,} = req.body;
-
-    const {success} = productBody.safeParse(req.body)
-    if(!success){
-        throw new ApiError(411, "Invalid Input")
+  
+    if (
+      [name, description, category, price, stock].some(
+        (field) => field?.trim() === ""
+      )
+    ) {
+      throw new ApiError(400, "All fields are required");
     }
-
-    if(
-        [name,description,category,price,imgURL].some((field)=>
-        field?.trim() === "")
-    ){
-        throw new ApiError(400,"All fields are required")
+  
+    if (!imgURLs || imgURLs.length === 0) {
+      throw new ApiError(400, "Product images required.");
     }
-
-    const productBannerLocalPath = req.files?.productBanner[0]?.path;
-
-    if (!productBannerLocalPath) {
-        throw new ApiError(400, "Product image required.")
-        
-    } 
-    const productBanner = await uploadCloudinary(productBannerLocalPath)
-    
-    if(!productBanner){
-        throw new ApiError(400,"Product image is required")
+  
+    const uploadedImages = await Promise.all(
+      imgURLs.map(async (imageUrl) => {
+        return await uploadCloudinary(imageUrl);
+      })
+    );
+  
+    if (uploadedImages.some((image) => !image)) {
+      throw new ApiError(400, "Error uploading product images.");
     }
-
-
+  
     const product = await Product.create({
-        name,
-        description,
-        category,
-        imgURL: productBanner.url,
+      name,
+      description,
+      category,
+      price,
+      stock, 
+      owner: req.user._id, 
+      imgURLs: uploadedImages.map((image) => image.url),
     });
-
-    const createdProduct = await Product.findById(product._id)
-
-
-    if(!createdProduct){
-        throw new ApiError(500,"Something went wrong while adding product")
+  
+    if (!product) {
+      throw new ApiError(500, "Something went wrong while adding product");
     }
-
+  
     return res.status(201).json(
-        new ApiResponse(200, "Product added succesfully")
-    )
+      new ApiResponse(200, "Product added successfully")
+    );
+  });
+  
 
-})
 
+  const modifyProduct = asyncHandler(async (req, res) => {
+    const { name, description, category, price, stock } = req.body;
+    const imgURLs = req.files?.productImages?.map((file) => file.path);
+  
+  
+    if (!imgURLs || imgURLs.length === 0) {
+      throw new ApiError(400, "Product images required.");
+    }
+  
+    const uploadedImages = await Promise.all(
+      imgURLs.map(async (imageUrl) => {
+        return await uploadCloudinary(imageUrl);
+      })
+    );
+  
+    if (uploadedImages.some((image) => !image)) {
+      throw new ApiError(400, "Error uploading product images.");
+    }
+  
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.product?._id,
+      {
+        $set: {
+          name: name,
+          description: description,
+          category: category,
+          price: price,
+          stock: stock, 
+          owner: req.user._id, 
+          imgURLs: uploadedImages.map((image) => image.url),
+        },
+      },
+    );
+  
+    if (!updatedProduct) {
+      throw new ApiError(500, "Something went wrong while modifying product");
+    }
+  
+    return res.status(200).json(
+      new ApiResponse(200, updatedProduct, "Product modified successfully")
+    );
+  });
+  
 
-const modifyProduct = asyncHandler(async(req,res)=>{
-    const {name, desciption, category, price} = req.body;
+  const getProduct = asyncHandler(async (req, res) => {
+    const {productId} = req.body;
+    console.log(productId)
+    const product = await Product.findById(productId);
+    console.log(product)
 
-    const {success} = productBody.safeParse(req.body)
-    if(!success){
-        throw new ApiError(411, "Invalid Input")
+    if (!product) {
+        throw new ApiError(404, "Product not found");
     }
 
-    const productBannerLocalPath = req.files?.productBanner[0]?.path;
+    res.status(200).json(new ApiResponse(200, product, "Product details fetched successfully"));
+});
 
-    
-    const productBanner = await uploadCloudinary(productBannerLocalPath)
-    
-   
+const getAllProducts = asyncHandler(async (req, res) => {
+
+    const products = await Product.find();
+
+    if (!products || products.length === 0) {
+      throw new ApiError(404, 'No products found');
+    }
+  
+
+    res.status(200).json({
+      success: true,
+      message: 'Products retrieved successfully',
+      data: products,
+    });
+  });
 
 
-    const product = await Product.findByIdAndUpdate(
-        req.product?._id,
-        {
-            $set:{
-                name: name,
-                description: desciption,
-                category: category,
-                price: price,
-                imgURL: productBanner?.url
-            }
-        }
-        )
-
-        return res
-        .status(200)
-        .json(new ApiResponse(200, product,"Product modified successfully"))
-
-})
-
-const getProduct = asyncHandler(async(req, res)=>{
-    return res.status(200)
-    .json(new ApiResponse(200, req.product, "Product details fetched successfully"))
-})
-
-const bulkProduct = asyncHandler( async (req, res)=>{
+const bulkProduct = asyncHandler(async (req, res) => {
     const filter = req.query.filter || "";
 
-    const product = await Product.find({
+    const products = await Product.find({
         $or: [{
             name: {
-                '$regex' : filter
+                '$regex': filter
             }
-        },
-    ]
-    })
+        }]
+    });
 
     res.json({
-        user: users.map(user => ({
-            username: user.username,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            _id: user._id
+        products: products.map(product => ({
+            name: product.name,
+            description: product.description,
+            category: product.category,
+            price: product.price,
+            stock: product.stock,
+            owner: product.owner
         }))
-    })
-})
+    });
+});
 
 
-export {addProduct, modifyProduct, getProduct, bulkProduct}
+
+export {addProduct, modifyProduct, getAllProducts , getProduct, bulkProduct}
