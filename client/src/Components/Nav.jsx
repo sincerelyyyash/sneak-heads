@@ -11,7 +11,6 @@ const Nav = () => {
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem('accessToken')
   const handleSearch = (query) => {
-    // Implement your search logic here
     console.log('Search Query:', query);
   };
 
@@ -27,7 +26,6 @@ const Nav = () => {
           width={130}
           height={30} />
         </a>
-        {/* //searchbar here */}
         <SearchBar onSearch={handleSearch} />
         <ul className='flex-1 flex justify-center items-center
         gap-16 max-lg:hidden'>
@@ -48,7 +46,7 @@ const Nav = () => {
          text-lg
          text-slate-gray'
          onClick={()=>{
-            navigate("/products")
+            navigate("/cart")
         }}>View Cart</button>
           </li>
           <li>

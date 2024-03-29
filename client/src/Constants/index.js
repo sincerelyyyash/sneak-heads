@@ -37,6 +37,7 @@ export const products = [
         imgURLs: [shoe4,shoe4,shoe4,shoe6,],
         name: "Nike Air Jordan-01",
         price: "$200.20",
+        quantity: 3,
         description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance. Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance. Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
     },
     {
@@ -44,6 +45,7 @@ export const products = [
         imgURLs: [shoe5, shoe4, shoe4, shoe6,],
         name: "Nike Air Jordan-10",
         price: "$210.20",
+        quantity: 4,
         description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
 
     },
@@ -52,6 +54,7 @@ export const products = [
         imgURLs: [shoe6,shoe4,shoe5,shoe4,],
         name: "Nike Air Jordan-100",
         price: "$220.20",
+        quantity: 2,
         description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
 
     },
@@ -60,6 +63,7 @@ export const products = [
         imgURLs: [shoe7,shoe4,shoe5,shoe6,],
         name: "Nike Air Jordan-001",
         price: "$230.20",
+        quantity: 1,
         description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance."
 
     },

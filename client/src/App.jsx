@@ -3,15 +3,14 @@ import { BrowserRouter, Route, Routes }from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
-import ProductDetailsPage from "./Pages/ProductDetailsPage";
-import { ProductsPage } from "./Pages/ProductsPage";
 
 
-
-
-const Signin = lazy(()=>import("./Pages/Signin"));
 const Homepage = lazy(()=> import("./Pages/Homepage"));
+const Signin = lazy(()=>import("./Pages/Signin"));
 const Signup = lazy(()=> import("./Pages/Signup"));
+const ProductsPage = lazy(()=> import("./Pages/ProductsPage"));
+const ProductDetailsPage = lazy(()=> import("./Pages/ProductDetailsPage"));
+const Cart = lazy(()=> import("./Pages/Cart"));
 
 
 
@@ -25,6 +24,7 @@ const App = () => (
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/products" element={<ProductsPage/>}/>
     <Route path="products/:productId" element={<ProductDetailsPage/>}/>
+    <Route path="/cart" element={<Cart/>}/>
   </Routes>
   </Suspense>
   </BrowserRouter>
