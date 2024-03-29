@@ -4,7 +4,7 @@ import { Footer } from '../sections'
 import PopularProductCard from '../Components/PopularProductCard'
 import { products } from "../Constants"
 
-export const ProductsPage = () => {
+ function ProductsPage(){
   return (
     <main className="flex flex-col">
       <div>
@@ -30,3 +30,5 @@ export const ProductsPage = () => {
     </main>
   )
 }
+
+export default ProductsPage

@@ -6,7 +6,7 @@ import { CustomerReviews, Footer, Hero,
 
 function Homepage() {
   return (
-    <main className="relative ">
+    <main className="relative">
     <Nav/> 
     <section className="xl:pl-8">
       <Hero/>
