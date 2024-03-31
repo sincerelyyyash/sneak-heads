@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { products } from '../Constants';
 import ImageOptions from '../Components/ImageOptions';
 import Button from '../Components/Button';
-import { star } from '../assets/icons';
 import ProductNotfound from '../Components/ProductNotfound';
 import { Footer } from '../sections';
 import Nav from '../Components/Nav';
@@ -53,9 +52,6 @@ const ProductDetailsPage = () => {
         </div>
         <div className="w-full lg:w-full mx-auto lg:mx-0">
           <h1 className='mt-2 text-4xl leading-normal font-semibold font-palanquin text-black'>{name}</h1>
-          <div className='mt-3 flex justify-start items-start gap-2.5'>
-            <img src={star} alt="Star" width={24} height={24} className='object-contain m-0' />
-          </div>
           <p className='mt-4 font-montserrat text-gray-600 lg:max-w-lg'>{description}</p>
           <p className="mt-2 font-semibold font-montserrat text-coral-red text-3xl leading-normal">{price}</p>
           <div className="mt-4">
