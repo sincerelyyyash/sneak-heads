@@ -103,7 +103,7 @@ const getAllProductsFromCart = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, cart.products, 'Products retrieved successfully'));
 });
 
-module.exports = {
+export {
   addToCart,
   modifyProductQuantity, 
   removeFromCart,
