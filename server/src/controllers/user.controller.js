@@ -123,7 +123,8 @@ const loginUser = asyncHandler(async (req,res)=>{
     .cookie("refreshToken", refreshToken, options)
     .json(
         new ApiResponse( 200, {
-            user: loggedInUser, accessToken, refreshToken
+            user: loggedInUser, 
+            accessToken, refreshToken
         }, "User logged in succesfully")
     )
 })
@@ -208,8 +209,10 @@ const changePassword = asyncHandler(async(req,res)=>{
 })
 
 const currentUser = asyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user?._id)
+
     return res.status(200)
-    .json(new ApiResponse(200, req.user, "User details fetched successfully"))
+    .json(new ApiResponse(200, user, "User details fetched successfully"))
 })
 
 const updateProfile =asyncHandler(async(req,res)=>{
