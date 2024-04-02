@@ -9,11 +9,10 @@ import SearchBar from './SearchBar';
 const Nav = () => {
 
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem('accessToken')
+  const isLoggedIn = localStorage.getItem('accessToken');
   const handleSearch = (query) => {
     console.log('Search Query:', query);
   };
-
 
   return (
     <header className='padding-x

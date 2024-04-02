@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CustomerReviews, Footer, Hero, 
     PopularProducts, Services, SpecialOffer,
   Subscribe,SuperQuality } from "../sections";
   import Nav from "../Components/Nav";
+import { useGetProducts } from '../Api/ProductsApi';
+
+
 
 function Homepage() {
+  const { getProducts } = useGetProducts();
+  useEffect(()=>{
+    getProducts();
+  })
+  
   return (
     <main className="relative ">
     <Nav/> 

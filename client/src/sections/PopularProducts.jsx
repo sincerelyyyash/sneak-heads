@@ -1,7 +1,11 @@
+import { useRecoilValue } from "recoil"
 import PopularProductCard from "../Components/PopularProductCard"
-import { products } from "../Constants"
+import { productDetails } from "../Recoil/productAtoms"
 
 const PopularProducts = () => {
+
+  const productsData = useRecoilValue(productDetails); 
+  const products = productsData.data;
   return (
     <div>
       <section id="products" className="max-container max-sm:mt-12">
@@ -16,15 +20,16 @@ const PopularProducts = () => {
           </p>
         </div>
 
-        <div
-        className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 
-        sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-14">
-          {products.map((product)=>(
-            <PopularProductCard 
-            productId={product.productId}
-            key={product.productId} {...product}/>
+        <div className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-14">
+          {products.slice(0, 4).map((product) => (
+          <PopularProductCard 
+          productId={product._id}
+          key={product._id}
+          {...product}
+          />
           ))}
         </div>
+
 
       </section>
     </div>

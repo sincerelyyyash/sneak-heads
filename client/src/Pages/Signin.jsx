@@ -11,15 +11,14 @@ function Signin() {
     const navigate = useNavigate();
 
 
-    const handleSignIn = async(email, fullname, password) =>{
-        SignIn(email, fullname, password)
-
-        if(!SignIn){
-            console.log("Error signing up")
+    const handleSignIn = async (email, password) => {
+        try {
+            await SignIn(email, password);
+            navigate("/");
+        } catch (error) {
+            alert("Failed to sign in. Please try again.");
         }
-        navigate("/")
-      
-    }
+    };
 
   return (
     <div className='flex justify-center'>
