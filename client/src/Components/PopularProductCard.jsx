@@ -15,7 +15,7 @@ const PopularProductCard = ({ imgURLs, name, price, productId }) => {
         onMouseLeave={() => setIsHovered(false)}
       >
         <Link to={`/products/${productId}`} className="block">
-          <img src={firstImage} alt={name} className="w-[280px] h-[340px]" />
+          <img src={firstImage} alt={name} className="w-[280px] h-[340px]" /> 
           <div className="product-info p-4">
             <h3 className="mt-2 text-2xl leading-normal font-semibold font-palanquin">{name}</h3>
             <div className='flex flex-row gap-4'>

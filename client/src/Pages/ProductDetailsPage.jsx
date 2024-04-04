@@ -9,29 +9,41 @@ import { getProductDetails } from '../Api/ProductsApi';
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [selectedImage, setSelectedImage] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [productDetails, setProductDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('');
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const product = await getProductDetails(productId);
-        setProduct(product);
-        setSelectedImage(product.imgURLs[0]);
+        const data = await getProductDetails(productId);
+        setProductDetails(data);
+        setSelectedImage(data.imgURLs && data.imgURLs.length > 0 ? data.imgURLs[0] : '');
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching product details:', error);
+        setError(error.message);
+        setLoading(false);
       }
     };
 
     fetchProductDetails();
   }, [productId]);
 
-  if (!product) {
+  if (!productDetails) {
     return <div><ProductNotfound/></div>;
   }
 
-  const { name, description, price } = product;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const { name, description, price } = productDetails;
 
   const handleIncreaseQuantity = () => {
     if (quantity < 10) {
@@ -51,13 +63,13 @@ const ProductDetailsPage = () => {
         <Nav/>
       </section>
       <div className='padding flex flex-col lg:flex-row justify-center items-center lg:items-start lg:gap-x-12'>
-        <div className="w-full lg:w-auto mb-8 lg:mb-0">
+        <div className="w-full lg:w-[680px] mb-8 lg:mb-0">
           <div className='w-full flex justify-center'>
-            <img src={selectedImage} alt={name} className="w-full lg:w-[540px] h-auto" />
+            <img src={selectedImage} alt={name} className="w-full lg:w-[540px] h-[480px]" />
           </div>
           <div className="flex justify-start">
             <ImageOptions
-              imgURLs={product.imgURLs}
+              imgURLs={productDetails.imgURLs}
               selectedImage={selectedImage}
               setSelectedImage={setSelectedImage}
             />

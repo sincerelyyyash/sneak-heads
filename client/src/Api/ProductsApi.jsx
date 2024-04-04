@@ -25,11 +25,17 @@ export const useGetProducts = () => {
 
 export const getProductDetails = async (productId) => {
     try {
-        const productDetails = await axios.get(`${baseUrl}/product/get-products?productId=${productId}`);
-        const data = productDetails.data;
-        return data;
+      const response = await axios.get(`${baseUrl}/product/get-products`, {
+        params: {
+          productId: productId
+        }
+      });
+      const { data } = response.data; 
+      return data;
     } catch (error) {
-        throw error;
+      throw error;
     }
-};
+  };
+  
+
 
