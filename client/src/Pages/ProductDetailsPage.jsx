@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ImageOptions from '../Components/ImageOptions';
+import ImageOptions from '../Components/ProductImagesOptions';
 import Button from '../Components/Button';
 import ProductNotfound from '../Components/ProductNotfound';
 import { Footer } from '../sections';
@@ -93,7 +93,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       </div>
-      <section className="padding-x padding-t pt-8 pb-8 bg-black">
+      <section className="padding-x padding-t pt-8 pb-8 bg-black ">
         <Footer/>
       </section>
     </div>
