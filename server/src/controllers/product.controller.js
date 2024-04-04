@@ -97,19 +97,6 @@ const addProduct = asyncHandler(async (req, res) => {
   });
   
 
-//   const getProduct = asyncHandler(async (req, res) => {
-//     const {productId} = req.body;
-//     console.log(productId)
-//     const product = await Product.findById(productId);
-//     console.log(product)
-
-//     if (!product) {
-//         throw new ApiError(404, "Product not found");
-//     }
-
-//     res.status(200).json(new ApiResponse(200, product, "Product details fetched successfully"));
-// });
-
 const getProduct = asyncHandler(async (req, res) => {
   const { productId } = req.query;
   const product = await Product.findById(productId);
