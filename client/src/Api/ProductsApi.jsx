@@ -19,5 +19,17 @@ export const useGetProducts = () => {
         }
     }
 
-    return { getProducts }; // Return the function from the custom hook
+    return { getProducts }; 
 };
+
+
+export const getProductDetails = async (productId) => {
+    try {
+        const productDetails = await axios.get(`${baseUrl}/product/get-products?productId=${productId}`);
+        const data = productDetails.data;
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};
+

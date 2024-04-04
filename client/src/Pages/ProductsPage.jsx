@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Nav from '../Components/Nav'
 import { Footer } from '../sections'
 import PopularProductCard from '../Components/PopularProductCard'
 import { useRecoilValue } from "recoil"
 import { productDetails } from "../Recoil/productAtoms"
+import { useGetProducts } from '../Api/ProductsApi';
 
 
  function ProductsPage(){
+  const { getProducts } = useGetProducts();
+  useEffect(()=>{
+    getProducts();
+  })
 
   const productsData = useRecoilValue(productDetails); 
   const products = productsData.data;
@@ -16,7 +21,7 @@ import { productDetails } from "../Recoil/productAtoms"
         <Nav/>
       </div>
       <div className='p-10 m-10'>
-      <div className="flex flex-col justify-start gap-5 pt-10">
+      <div className="flex flex-col justify-start gap-5 pt-20">
           <h2 className="text-4xl font-palanquin font-bold"> All <span className="text-coral-red">Popular</span> Products</h2>
         </div>
         <div className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-14">

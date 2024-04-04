@@ -19,7 +19,7 @@ const PopularProductCard = ({ imgURLs, name, price, productId }) => {
           <div className="product-info p-4">
             <h3 className="mt-2 text-2xl leading-normal font-semibold font-palanquin">{name}</h3>
             <div className='flex flex-row gap-4'>
-              <p className="mt-2 font-normal font-montserrat text-black text-2xl leading-normal">Rs. {price}</p>
+              <p className="mt-2 font-normal text-black text-xl leading-normal">Rs. {price}</p>
               <SquareButton label='Add to Cart' />
             </div>
           </div>

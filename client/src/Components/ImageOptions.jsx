@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ImageOptions = ({ imgURLs, selectedImage, setSelectedImage }) => {
+const ImageOptions = ({ imgURLs=[], selectedImage, setSelectedImage }) => {
   return (
     <div className="flex justify-center items-center m-4 p-4">
-      {imgURLs.map((image, index) => (
+      {imgURLs && imgURLs.map((image, index) => (
         <div key={index} className="m-2 flex justify-center items-center">
           <img
             src={image}

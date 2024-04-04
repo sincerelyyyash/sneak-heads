@@ -1,24 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { products } from '../Constants';
 import ImageOptions from '../Components/ImageOptions';
 import Button from '../Components/Button';
 import ProductNotfound from '../Components/ProductNotfound';
 import { Footer } from '../sections';
 import Nav from '../Components/Nav';
+import { getProductDetails } from '../Api/ProductsApi'; 
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
-  const product = products.find(product => product.productId == productId);
+  const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const product = await getProductDetails(productId);
+        setProduct(product);
+        setSelectedImage(product.imgURLs[0]);
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    };
+
+    fetchProductDetails();
+  }, [productId]);
 
   if (!product) {
     return <div><ProductNotfound/></div>;
   }
 
-  const { imgURLs, name, price, description } = product;
-
-  const [selectedImage, setSelectedImage] = useState(imgURLs[0]);
-  const [quantity, setQuantity] = useState(1);
+  const { name, description, price } = product;
 
   const handleIncreaseQuantity = () => {
     if (quantity < 10) {
@@ -44,7 +57,7 @@ const ProductDetailsPage = () => {
           </div>
           <div className="flex justify-start">
             <ImageOptions
-              imgURLs={imgURLs}
+              imgURLs={product.imgURLs}
               selectedImage={selectedImage}
               setSelectedImage={setSelectedImage}
             />
