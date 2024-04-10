@@ -1,26 +1,26 @@
-import {atom} from 'recoil';
+import { atom } from 'recoil';
 
 
 
 export const fullnameAtom = atom({
-    key: "fullnameAtom",
-    default: ""
+  key: "fullnameAtom",
+  default: ""
 })
 
 
 export const emailAtom = atom({
-    key: "emailAtom",
-    default: ""
+  key: "emailAtom",
+  default: ""
 })
 
 export const passwordAtom = atom({
-    key: "passwordAtom",
-    default: ""
+  key: "passwordAtom",
+  default: ""
 })
 
 export const accessTokenAtom = atom({
-    key: "accessToken",
-    default: ""
+  key: "accessToken",
+  default: ""
 })
 
 

@@ -6,6 +6,8 @@ import ProductNotfound from '../Components/ProductNotfound';
 import { Footer } from '../sections';
 import Nav from '../Components/Nav';
 import { getProductDetails } from '../Api/ProductsApi'; 
+import { addToCart } from '../Api/CartsApi';
+import PopUpBox from '../Components/PopUpBox';
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -88,7 +90,10 @@ const ProductDetailsPage = () => {
             </div>
           </div>
           <div className="mt-11 flex flex-wrap gap-4">
-            <Button label="Add to cart" backgroundColor='bg-white' borderColor='border-slate-gray' textColor='text-slate-gray' />
+            <Button label="Add to cart" backgroundColor='bg-white' borderColor='border-slate-gray' textColor='text-slate-gray' onClick={()=>{
+              addToCart(productId,quantity);
+              PopUpBox("added to cart")
+            }} />
             <Button label='Shop Now' />
           </div>
         </div>
