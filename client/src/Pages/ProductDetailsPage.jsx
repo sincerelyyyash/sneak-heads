@@ -16,6 +16,7 @@ const ProductDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
+  
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -46,6 +47,15 @@ const ProductDetailsPage = () => {
   }
 
   const { name, description, price } = productDetails;
+
+  const handleAddToCart = async (productId, quantity) => {
+    try {
+      const response = await addToCart(productId, quantity);
+      console.log(response)
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleIncreaseQuantity = () => {
     if (quantity < 10) {
@@ -80,7 +90,7 @@ const ProductDetailsPage = () => {
         <div className="w-full lg:w-full mx-auto lg:mx-0">
           <h1 className='mt-2 text-4xl leading-normal font-semibold font-palanquin text-black'>{name}</h1>
           <p className='mt-4 font-montserrat text-gray-600 lg:max-w-lg'>{description}</p>
-          <p className="mt-2 font-semibold font-montserrat text-coral-red text-3xl leading-normal">{price}</p>
+          <p className="mt-2 font-semibold font-montserrat text-coral-red text-3xl leading-normal">Rs. {price}</p>
           <div className="mt-4">
             <h2 className='font-montserrat text-gray-600'>Quantity: (Max- 10 per order)</h2>
             <div className="flex gap-2 mt-2">
@@ -91,7 +101,7 @@ const ProductDetailsPage = () => {
           </div>
           <div className="mt-11 flex flex-wrap gap-4">
             <Button label="Add to cart" backgroundColor='bg-white' borderColor='border-slate-gray' textColor='text-slate-gray' onClick={()=>{
-              addToCart(productId,quantity);
+              handleAddToCart(productId,quantity);
               PopUpBox("added to cart")
             }} />
             <Button label='Shop Now' />

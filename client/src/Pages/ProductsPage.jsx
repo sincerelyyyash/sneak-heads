@@ -30,6 +30,7 @@ import { useGetProducts } from '../Api/ProductsApi';
           productId={product._id}
           key={product._id}
           {...product}
+          
           />
           ))}
         </div>

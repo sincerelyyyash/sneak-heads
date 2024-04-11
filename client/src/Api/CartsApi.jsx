@@ -1,42 +1,88 @@
 import axios from 'axios';
 import { baseUrl } from '../Constants';
+import { cartItem } from '../Recoil/cartAtom';
+import { useSetRecoilState } from "recoil";
+import Cookies from "js-cookie";
 
 
-export const addToCart = async (productId, quantity) => {
+
+// const token = localStorage.getItem("accessToken")
+const token = Cookies.get("accessToken");
+const config = {
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+};
+
+const addToCart = async (productId, quantity) => {
   try {
-    const response = await axios.post(`${baseUrl}/cart/add/${productId}`, { quantity });
+    const response = await axios.post(baseUrl + '/cart/add', {productId, quantity },{
+      withCredentials: true,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-
-export const modifyProductQuantity = async (productId, quantity) => {
+const modifyProductQuantity = async (productId, quantity) => {
   try {
-    const response = await axios.post(`${baseUrl}/cart/modify/${productId}`, { quantity });
+    const response = await axios.post(baseUrl+ '/cart/modify', { productId, quantity },{
+      withCredentials: true,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-
-export const removeFromCart = async (productId) => {
+const removeFromCart = async (productId) => {
   try {
-    const response = await axios.post(`${baseUrl}/cart/remove/${productId}`);
+    const response = await axios.post('${baseUrl}/cart/remove', {productId},{
+      withCredentials: true,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
+const fetchCartItems = () =>{
+  const setCartItems = useSetRecoilState(cartItem);
 
-export const getAllProductsFromCart = async () => {
-  try {
-    const response = await axios.post(`${baseUrl}/cart/getall`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const getAllProductsFromCart = async () => {
+    try {
+      const cartDetails = await axios.get(`${baseUrl}/cart/getall`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCartItems(cartDetails.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  return {getAllProductsFromCart}
+};
+
+
+
+export {
+  addToCart,
+  modifyProductQuantity,
+  removeFromCart,
+  fetchCartItems
 };

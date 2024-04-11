@@ -3,13 +3,15 @@ import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import Cookies from "js-cookie";
 
 
 
 const Nav = () => {
 
   const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem('accessToken');
+  // const isLoggedIn = localStorage.getItem('accessToken');
+  const isLoggedIn = Cookies.get("accessToken");
   const handleSearch = (query) => {
     console.log('Search Query:', query);
   };
@@ -49,18 +51,29 @@ const Nav = () => {
         }}>View Cart</button>
           </li>
           <li>
-        {isLoggedIn ? (<p className='font-montserrat
-              leading-normal
-              text-lg
-              text-slate-gray'>Hello, User </p>): <button 
-         className='font-montserrat
-         leading-normal
-         text-lg
-         text-slate-gray'
-         onClick={()=>{
-            navigate("/signin")
-        }}>Sign-In</button>}
-        </li>        
+  {isLoggedIn === true ? (
+    <p className='font-montserrat leading-normal text-lg text-slate-gray'>Hello, User</p>
+  ) : isLoggedIn === false ? (
+    <button 
+      className='font-montserrat leading-normal text-lg text-slate-gray'
+      onClick={() => {
+        navigate("/signin");
+      }}
+    >
+      Sign-In
+    </button>
+  ) : (
+    <button 
+      className='font-montserrat leading-normal text-lg text-slate-gray'
+      onClick={() => {
+        navigate("/signin");
+      }}
+    >
+      Sign-In
+    </button>
+  )}
+</li>
+
         </ul>
     
       
