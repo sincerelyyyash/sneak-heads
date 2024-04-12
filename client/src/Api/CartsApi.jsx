@@ -64,7 +64,9 @@ const fetchCartItems = () =>{
 
   const getAllProductsFromCart = async () => {
     try {
-      const cartDetails = await axios.get(`${baseUrl}/cart/getall`, {}, {
+      const cartDetails = await axios.get(`${baseUrl}/cart/getall`, {
+        withCredentials: true,
+      }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
