@@ -1,9 +1,10 @@
+// Cart.jsx
 import React, { useEffect, useState } from 'react';
 import Nav from '../Components/Nav';
 import { Footer } from '../sections';
 import CartTile from '../Components/CartTile';
-import { cartItem } from '../Recoil/cartAtom';
 import { useRecoilValue } from 'recoil';
+import { cartItem } from '../Recoil/cartAtom';
 import { fetchCartItems } from '../Api/CartsApi';
 
 function Cart() {
@@ -31,8 +32,14 @@ function Cart() {
           </div>
         ) : (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {cart.map((product, index) => (
-              <CartTile key={index} product={product} quantity={product.quantity} />
+            {cart.map((cartItem, index) => (
+              <CartTile 
+                key={index} 
+                name={cartItem.product.name} 
+                price={cartItem.product.price} 
+                imgURLs={cartItem.product.imgURLs} 
+                quantity={cartItem.quantity} 
+              />
             ))}
           </section>
         )}
