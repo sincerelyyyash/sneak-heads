@@ -79,7 +79,12 @@ const removeFromCart = asyncHandler(async (req, res) => {
     throw new ApiError(404, 'Cart not found');
   }
 
-  cart.products = cart.products.filter((item) => String(item.product)!== productId);
+  const productIndex = cart.products.findIndex(item => String(item.product) === productId);
+  if (productIndex === -1) {
+    throw new ApiError(404, 'Product not found in cart');
+  }
+
+  cart.products.splice(productIndex, 1);
 
   cart.total = cart.products.reduce((acc, product) => acc + product.subtotal, 0);
 
@@ -88,17 +93,23 @@ const removeFromCart = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, null, 'Product removed from cart successfully'));
 });
 
+
+
 const getAllProductsFromCart = asyncHandler(async (req, res) => {
-  const userId = req.user._id; 
+  const userId = req.user._id;
 
   const cart = await Cart.findOne({ owner: userId }).populate('products.product');
 
   if (!cart) {
-    throw new ApiError(404, 'Cart not found');
+      throw new ApiError(404, 'Cart not found');
   }
 
-  res.status(200).json(new ApiResponse(200, cart.products, 'Products retrieved successfully'));
+  res.status(200).json(new ApiResponse(200, {
+      products: cart.products,
+      total: cart.total
+  }, 'Products retrieved successfully'));
 });
+
 
 export {
   addToCart,
