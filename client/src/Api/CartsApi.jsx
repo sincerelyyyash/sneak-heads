@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../Constants';
-import { cartItem } from '../Recoil/cartAtom';
+import { cartItem, cartTotal } from '../Recoil/cartAtom';
 import { useSetRecoilState } from "recoil";
 import Cookies from "js-cookie";
 
@@ -46,7 +46,7 @@ const modifyProductQuantity = async (productId, quantity) => {
 
 const removeFromCart = async (productId) => {
   try {
-    const response = await axios.post('${baseUrl}/cart/remove', {productId},{
+    const response = await axios.post(baseUrl+'/cart/remove', {productId},{
       withCredentials: true,
     }, {
       headers: {
@@ -61,6 +61,8 @@ const removeFromCart = async (productId) => {
 
 const fetchCartItems = () =>{
   const setCartItems = useSetRecoilState(cartItem);
+  const setCartTotal = useSetRecoilState(cartTotal);
+
 
   const getAllProductsFromCart = async () => {
     try {
@@ -71,7 +73,10 @@ const fetchCartItems = () =>{
           Authorization: `Bearer ${token}`,
         },
       });
-      setCartItems(cartDetails.data);
+      setCartItems(products);
+        setCartTotal(total);
+      console.log(cartDetails.products)
+
     } catch (error) {
       throw error;
     }
