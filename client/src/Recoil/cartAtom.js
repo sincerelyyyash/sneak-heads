@@ -9,3 +9,8 @@ export const cartItem = atom({
         success: false
       }
 })
+
+export const cartTotal = atom({
+  key: "cartTotal",
+  default: 0
+})

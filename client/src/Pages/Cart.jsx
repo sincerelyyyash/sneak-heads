@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Nav from '../Components/Nav';
 import { Footer } from '../sections';
 import CartTile from '../Components/CartTile';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState  } from 'recoil';
 import { cartItem } from '../Recoil/cartAtom';
 import { fetchCartItems } from '../Api/CartsApi';
 import SquareButton from '../Components/SquareButton';
+import { cartTotal } from '../Recoil/cartAtom';
+
 
 function Cart() {
   const { getAllProductsFromCart } = fetchCartItems();
@@ -25,6 +27,7 @@ function Cart() {
     setTotal(newTotal);
   }, [cart]);
 
+
   return (
     <div>
       <Nav />
@@ -34,10 +37,11 @@ function Cart() {
             <p className="text-3xl font-montserrat text-gray-500">Your cart is empty ;(</p>
           </div>
         ) : (
+          
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className='flex justify-between'>
-            <p className="text-black text-lg font-semibold text-left mb-4">Total: Rs. {total.toFixed(2)}</p>
-            <SquareButton label={"Checkout"} />
+            <p className="text-coral-red text-2xl font-semibold text-left font-montserrat">Shopping Cart</p>
+            <div className='flex justify-end mb-4'>
+              <SquareButton label={"Checkout"} />
             </div>
             <section>
               {cart.map((cartItem, index) => (
@@ -47,9 +51,15 @@ function Cart() {
                   price={cartItem.product.price} 
                   imgURLs={cartItem.product.imgURLs} 
                   quantity={cartItem.quantity} 
+                  productId={cartItem.product._id}
                 />
               ))}
             </section>
+            <div className='flex justify-end mt-4'>
+            <p className="text-black text-3xl font-semibold text-left font-Palanquin mr-4 ">Total: </p>
+            <p className="text-black text-xl mt-2 font-semibold text-left font-Palanquin ">₹ </p>
+            <p className="text-black text-3xl font-semibold text-left font-Palanquin">  {total.toFixed(2)}</p>
+            </div>
           </div>
         )}
       </div>
