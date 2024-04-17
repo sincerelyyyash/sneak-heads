@@ -1,68 +1,77 @@
 import mongoose from "mongoose";
-import { number } from "zod";
 
-const orderSchema = new mongoose.Schema({
-    shippingInfo:{
-        address:{
+const { Schema } = mongoose;
+
+const orderSchema = new Schema({
+    shippingInfo: {
+        address: {
             type: String,
             required: true
         },
-        city:{
+        city: {
             type: String,
             required: true
         },
-        state:{
+        state: {
             type: String,
-            required:true
+            required: true
         },
         country: {
             type: String,
-            required: true,
+            required: true
         },
-        pincode:{
+        pincode: {
             type: Number,
             required: true
         },
-        status:{
+        status: {
+            type: String,
             enum: ["Processing", "Shipped", "Delivered"],
-            default: ["Processing"],
-        },
+            default: "Processing"
+        }
     },
-    orderItems:[{
-        name: String,
-        photo: String,
-        price: Number,
-        quanity: Number,
-        productID: {
-            type: mongoose.Types.ObjectId,
-            ref: "Product"
+    orderItems: [{
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true,
+            min: 1,
+            max: 10
+        },
+        subtotal: {
+            type: Number,
+            required: true
         }
     }],
-    user:{
-        type: String,
-        ref: "User",
-        required: true,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    subtotal:{
-        type: Number,
-        required: true,
-    },
-    tax:{
+    subtotal: {
         type: Number,
         required: true
     },
-    shippingCharge:{
+    tax: {
         type: Number,
         required: true
     },
-    discount:{
+    shippingCharge: {
         type: Number,
         required: true
     },
-    total:{
+    discount: {
         type: Number,
         required: true
     },
-},{timestamps: true})
+    total: {
+        type: Number,
+        required: true
+    }
+}, { timestamps: true });
 
-export const Order = mongoose.model("Order", orderSchema)
+export const Order = mongoose.model("Order", orderSchema);
