@@ -59,31 +59,29 @@ const removeFromCart = async (productId) => {
   }
 };
 
-const fetchCartItems = () =>{
+const fetchCartItems = () => {
   const setCartItems = useSetRecoilState(cartItem);
   const setCartTotal = useSetRecoilState(cartTotal);
-
 
   const getAllProductsFromCart = async () => {
     try {
       const cartDetails = await axios.get(`${baseUrl}/cart/getall`, {
         withCredentials: true,
-      }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      const { products, total } = cartDetails.data.data;
       setCartItems(products);
-        setCartTotal(total);
-      console.log(cartDetails.products)
-
+      setCartTotal(total);
     } catch (error) {
       throw error;
     }
   };
 
-  return {getAllProductsFromCart}
+  return { getAllProductsFromCart };
 };
+
 
 
 
