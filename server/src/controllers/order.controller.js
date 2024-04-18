@@ -80,4 +80,32 @@ const newOrder = asyncHandler(async (req, res) => {
   );
 });
 
-export { newOrder };
+const cancelOrder = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+    const {orderId } = req.body;
+  
+    if (!userId || !orderId) {
+      throw new ApiError(400, "User ID and Order ID are required");
+    }
+  
+    const order = await Order.findById(orderId);
+  
+    if (!order) {
+      throw new ApiError(404, "Order not found");
+    }
+
+    if (order.user !== userId) {
+      throw new ApiError(403, "Unauthorized access to order");
+    }
+
+    order.shippingInfo.status = "Cancelled";
+  
+    await order.save();
+  
+    return res.status(200).json(
+      new ApiResponse(200, "Order cancelled successfully")
+    );
+  });
+  
+
+export { newOrder, cancelOrder };
