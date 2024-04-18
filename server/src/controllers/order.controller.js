@@ -83,32 +83,28 @@ const newOrderBody = zod.object({
   });
   
 
-const cancelOrder = asyncHandler(async (req, res) => {
+  const cancelOrder = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-
-    const { success, error } = cancelOrderBody.safeParse(req.body);
-  if (!success) {
-    return res.status(400).json(
-      new ApiResponse(400, "Invalid Inputs", error)
-    );
-  }
   
-    const {orderId } = req.body;
+    const { success, error } = cancelOrderBody.safeParse(req.body);
+    if (!success) {
+      return res.status(400).json(
+        new ApiResponse(400, "Invalid Inputs", error)
+      );
+    }
+  
+    const { orderId } = req.body;
   
     if (!userId || !orderId) {
       throw new ApiError(400, "User ID and Order ID are required");
     }
   
-    const order = await Order.findById(orderId);
+    const order = await Order.findOne({ _id: orderId, user: userId }).populate('orderItems.product');
   
     if (!order) {
       throw new ApiError(404, "Order not found");
     }
-
-    if (order.user !== userId) {
-      throw new ApiError(403, "Unauthorized access to order");
-    }
-
+  
     order.shippingInfo.status = "Cancelled";
   
     await order.save();
@@ -117,6 +113,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
       new ApiResponse(200, "Order cancelled successfully")
     );
   });
+  
   
 
 export { newOrder, cancelOrder };
