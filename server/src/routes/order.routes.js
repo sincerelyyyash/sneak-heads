@@ -1,6 +1,6 @@
 import { Router} from "express";
 import { isAdmin, verifyJWT } from "../middlewares/auth.middleware.js";
-import { cancelOrder, newOrder } from "../controllers/order.controller.js";
+import { cancelOrder, getAllOrders, newOrder } from "../controllers/order.controller.js";
 
 
 const router = Router();
@@ -8,6 +8,8 @@ const router = Router();
 
 router.route("/new-order").post(verifyJWT ,newOrder)
 router.route("/cancel-order").post(verifyJWT ,cancelOrder)
+
+router.route("/all-orders").get(verifyJWT ,getAllOrders)
 
 
 

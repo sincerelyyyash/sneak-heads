@@ -113,7 +113,22 @@ const newOrderBody = zod.object({
       new ApiResponse(200, "Order cancelled successfully")
     );
   });
+
+  const getAllOrders = asyncHandler(async (req, res) => {
+    
+    const orders = await Order.find({});
+  
+
+    if (!orders || orders.length === 0) {
+      throw new ApiError(404, "No orders found");
+    }
+
+    return res.status(200).json(
+      new ApiResponse(200, "Orders retrieved successfully", { orders })
+    );
+  });
+  
   
   
 
-export { newOrder, cancelOrder };
+export { newOrder, cancelOrder, getAllOrders };
