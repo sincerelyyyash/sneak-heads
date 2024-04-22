@@ -209,7 +209,7 @@ const changePassword = asyncHandler(async(req,res)=>{
 })
 
 const currentUser = asyncHandler(async(req,res)=>{
-    const user = await User.findById(req.user?._id)
+    const user = await User.findById(req.user?._id).select("email fullname role _id")
 
     return res.status(200)
     .json(new ApiResponse(200, user, "User details fetched successfully"))
