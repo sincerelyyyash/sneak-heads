@@ -4,13 +4,16 @@ import { CustomerReviews, Footer, Hero,
   Subscribe,SuperQuality } from "../sections";
   import Nav from "../Components/Nav";
 import { useGetProducts } from '../Api/ProductsApi';
+import { fetchUser } from '../Api/UserApi';
 
 
 
 function Homepage() {
   const { getProducts } = useGetProducts();
+  const {getUserDetails} = fetchUser();
   useEffect(()=>{
     getProducts();
+    getUserDetails();
   })
   
   return (

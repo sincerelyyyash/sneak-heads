@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import Cookies from "js-cookie";
+import DropdownMenu from './Dropdown';
+import { FaUser } from 'react-icons/fa';
 
 
 
 const Nav = () => {
 
   const navigate = useNavigate();
-  // const isLoggedIn = localStorage.getItem('accessToken');
-  const isLoggedIn = Cookies.get("accessToken");
   const handleSearch = (query) => {
     console.log('Search Query:', query);
   };
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleProfileClick = () => {
+    setShowDropdown(!showDropdown);
+  };
+
 
   return (
     <header className='padding-x
@@ -40,7 +46,7 @@ const Nav = () => {
             navigate("/products")
         }}>Products</button>
           </li>
-          <li>
+          {/* <li>
           <button 
          className='font-montserrat
          leading-normal
@@ -49,31 +55,22 @@ const Nav = () => {
          onClick={()=>{
             navigate("/cart")
         }}>View Cart</button>
-          </li>
+          </li> */}
           <li>
-  {isLoggedIn === true ? (
-    <p className='font-montserrat leading-normal text-lg text-slate-gray'>Hello, User</p>
-  ) : isLoggedIn === false ? (
-    <button 
-      className='font-montserrat leading-normal text-lg text-slate-gray'
-      onClick={() => {
-        navigate("/signin");
-      }}
-    >
-      Sign-In
-    </button>
-  ) : (
-    <button 
-      className='font-montserrat leading-normal text-lg text-slate-gray'
-      onClick={() => {
-        navigate("/signin");
-      }}
-    >
-      Sign-In
-    </button>
-  )}
-</li>
-
+            {/* Replace the profile icon with your icon */}
+            <button 
+              className='font-montserrat
+              leading-normal
+              text-lg
+              text-slate-gray'
+              onClick={handleProfileClick}
+            >
+              {/* <i className="fas fa-user"></i> */}
+              Profile
+            </button>
+            {/* Render the dropdown menu component */}
+            {showDropdown && <DropdownMenu />}
+          </li>
         </ul>
     
       
