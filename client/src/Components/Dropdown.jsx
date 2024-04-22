@@ -18,22 +18,22 @@ const DropdownMenu = () => {
   };
 
   return (
-    <div className="absolute center-0 mt-4 w-48 bg-white 
+    <div className="absolute center-0  w-48 bg-white 
     rounded-lg shadow-lg flex flex-col p-1 font-montserrat 
     leading-normal text-lg items-center text-slate-gray">
       <ul>
         {isLoggedIn ? (
           <>
-            <li>
-              <button onClick={() => navigate('/')}>Homepage</button>
+            <li className='mt-2'>
+              <button onClick={() => navigate('/orders')}>My Orders</button>
             </li>
-            <li>
-              <button onClick={() => navigate('/profile')}>Profile Settings</button>
-            </li>
-            <li>
+            <li className='mt-2'>
               <button onClick={() => navigate('/cart')}>View Cart</button>
             </li>
-            <li>
+            <li className='mt-2'>
+              <button onClick={() => navigate('/profile')}>Profile Settings</button>
+            </li>
+            <li className='mt-2'>
               <button onClick={handleLogout}>Logout</button>
             </li>
           </>
