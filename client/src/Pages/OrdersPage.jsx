@@ -6,6 +6,7 @@ import { getAllOrders } from '../Api/OrdersApi';
 
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -19,6 +20,8 @@ function OrdersPage() {
         }
       } catch (error) {
         console.error('Error fetching orders:', error);
+      } finally {
+        setLoading(false); 
       }
     };
   
@@ -31,10 +34,21 @@ function OrdersPage() {
       <div className='py-20 pt-40'>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-coral-red text-2xl font-semibold text-left font-montserrat">Orders</p>
-          <section>
-            {orders.map((order, index) => (
-              <OrderTile key={index} order={order} />
-            ))}
+          <section >
+            {loading ? (
+              <section className='h-screen flex items-center justify-center'>
+              <p className='text-3xl  font-palanquin'>Loading...</p>
+              </section>
+            ) : orders.length === 0 ? (
+              <section className='h-screen flex items-center justify-center'>
+                <p className='text-3xl font-palanquin'>No Orders to show!</p>
+              </section>
+              
+            ) : (
+              orders.map((order, index) => (
+                <OrderTile key={index} order={order} />
+              ))
+            )}
           </section>
         </div>
       </div>
