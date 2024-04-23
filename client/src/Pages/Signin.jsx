@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { SignIn } from '../Api/UserApi';
 import { emailAtom, passwordAtom } from '../Recoil/userAtoms';
-import PopUpBox from '../Components/PopUpBox';
+import Notification from '../Components/NotificationPopup';
+import Nav from '../Components/Nav';
+import { Footer } from '../sections';
 
 function Signin() {
   const [email, setEmail] = useRecoilState(emailAtom);
   const [password, setPassword] = useRecoilState(passwordAtom);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  
 
   const handleSignIn = async (email, password) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,14 +24,18 @@ function Signin() {
     try {
       await SignIn(email, password);
       navigate("/");
-      PopUpBox("Sign in sucessfull")
+      <Notification color="bg-green-500" message="Sign In successful" />
     } catch (error) {
       setError('Invalid credentials. Please try again.');
+      <Notification color="bg-red-500" message="Sign in failed" />
+
     }
   };
 
   return (
-    <div className='flex justify-center'>
+   <div>
+    <Nav/>
+     <div className='flex justify-center py-20 pt-36'>
       <div className="w-full p-5 shadow-2xl lg:max-w-lg mt-10 rounded-lg">
         <div className="space-y-2">
           <div className='flex flex-col px-10 py-10'>
@@ -86,6 +93,10 @@ function Signin() {
         </div>
       </div>
     </div>
+      <section className="padding-x padding-t pb-8 bg-black">
+        <Footer />
+      </section>
+   </div>
   );
 }
 

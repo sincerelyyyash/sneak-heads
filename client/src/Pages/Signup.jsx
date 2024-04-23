@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { emailAtom, fullnameAtom, passwordAtom } from '../Recoil/userAtoms';
 import { SignUp } from '../Api/UserApi.jsx';
+import Footer from '../sections/Footer.jsx';
+import Nav from '../Components/Nav.jsx';
 
 function Signup() {
   const navigate = useNavigate();
@@ -45,7 +47,9 @@ function Signup() {
   };
 
   return (
-    <div className='flex justify-center'>
+    <div>
+      <Nav/>
+      <div className='flex justify-center py-20 pt-36'>
       <div className="w-full p-5 shadow-2xl lg:max-w-lg mt-10 rounded-lg">
         <div className="space-y-2">
           <div className='flex flex-col px-10 py-10'>
@@ -100,6 +104,10 @@ function Signup() {
           </div>
         </div>
       </div>
+    </div>
+      <section className="padding-x padding-t pb-8 bg-black">
+        <Footer />
+      </section>
     </div>
   );
 }
