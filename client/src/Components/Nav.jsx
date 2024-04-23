@@ -3,9 +3,7 @@ import {headerLogo} from '../assets/images'
 import {hamburger} from '../assets/icons'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import Cookies from "js-cookie";
 import DropdownMenu from './Dropdown';
-import { FaUser } from 'react-icons/fa';
 
 
 
@@ -29,9 +27,9 @@ const Nav = () => {
       justify-between items-center
       max-container'>
         <a href="/">
-          <img src={headerLogo} alt="Logo"
-          width={130}
-          height={30} />
+          <h1 className='text-4xl text-coral-red font-semibold font-palanquin'>
+          SneakHeads
+        </h1>
         </a>
         <SearchBar onSearch={handleSearch} />
         <ul className='flex-1 flex justify-center items-center
@@ -46,18 +44,7 @@ const Nav = () => {
             navigate("/products")
         }}>Products</button>
           </li>
-          {/* <li>
-          <button 
-         className='font-montserrat
-         leading-normal
-         text-lg
-         text-slate-gray'
-         onClick={()=>{
-            navigate("/cart")
-        }}>View Cart</button>
-          </li> */}
           <li>
-            {/* Replace the profile icon with your icon */}
             <button 
               className='font-montserrat
               leading-normal
@@ -65,10 +52,8 @@ const Nav = () => {
               text-slate-gray'
               onClick={handleProfileClick}
             >
-              {/* <i className="fas fa-user"></i> */}
               Profile
             </button>
-            {/* Render the dropdown menu component */}
             {showDropdown && <DropdownMenu />}
           </li>
         </ul>

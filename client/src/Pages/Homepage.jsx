@@ -35,9 +35,9 @@ function Homepage() {
       <Services/>
     </section>
 
-    <section className="padding">
+    {/* <section className="padding">
       <SpecialOffer/>
-    </section>
+    </section> */}
 
     <section className="padding
     bg-pale-blue">
