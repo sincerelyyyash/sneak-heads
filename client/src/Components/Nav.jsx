@@ -10,9 +10,6 @@ import DropdownMenu from './Dropdown';
 const Nav = () => {
 
   const navigate = useNavigate();
-  const handleSearch = (query) => {
-    console.log('Search Query:', query);
-  };
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleProfileClick = () => {
@@ -26,12 +23,14 @@ const Nav = () => {
       <nav className='flex
       justify-between items-center
       max-container'>
+        <div className='w-2/3'>
         <a href="/">
           <h1 className='text-4xl text-coral-red font-semibold font-palanquin'>
           SneakHeads
         </h1>
         </a>
-        <SearchBar onSearch={handleSearch} />
+        </div>
+        {/* <SearchBar onSearch={handleSearch} /> */}
         <ul className='flex-1 flex justify-center items-center
         gap-16 max-lg:hidden'>
           <li>
