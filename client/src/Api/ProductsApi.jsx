@@ -36,6 +36,21 @@ export const getProductDetails = async (productId) => {
       throw error;
     }
   };
+
+  export const getBulkProducts = async (filter) => {
+    try {
+      const productDetails = await axios.get(`${baseUrl}/product/bulk`, {
+        params: {
+          filter: filter
+        }
+      });
+      const data = productDetails.data;
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
   
+
 
 
