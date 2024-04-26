@@ -11,8 +11,19 @@ function BillingInfo({ userName, userEmail }) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [userAddressData, setUserAddressData] = useRecoilState(userAddress); 
 
+  const [errors, setErrors] = useState({
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    pincode: '',
+    phoneNumber: ''
+  });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let sanitizedValue = value;
+  
     switch (name) {
       case 'address':
         setAddress(value);
@@ -27,17 +38,69 @@ function BillingInfo({ userName, userEmail }) {
         setCountry(value);
         break;
       case 'pincode':
-        setPincode(value);
+        sanitizedValue = value.replace(/\D/g, '').slice(0, 6);
+        setPincode(sanitizedValue);
         break;
       case 'phoneNumber':
-        setPhoneNumber(value);
+        sanitizedValue = value.replace(/\D/g, '').slice(0, 10);
+        setPhoneNumber(sanitizedValue);
         break;
       default:
         break;
     }
   };
+  
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      pincode: '',
+      phoneNumber: ''
+    };
+
+    if (!address) {
+      newErrors.address = 'Address is required';
+      valid = false;
+    }
+
+    if (!city) {
+      newErrors.city = 'City is required';
+      valid = false;
+    }
+
+    if (!state) {
+      newErrors.state = 'State is required';
+      valid = false;
+    }
+
+    if (!country) {
+      newErrors.country = 'Country is required';
+      valid = false;
+    }
+
+    if (!pincode || pincode.length !== 6) {
+      newErrors.pincode = 'Pincode must be a 6-digit number';
+      valid = false;
+    }
+
+    if (!phoneNumber || phoneNumber.length !== 10) {
+      newErrors.phoneNumber = 'Phone Number must be a 10-digit number';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   const updateAddressData = () => {
+    if (!validateForm()) {
+      return;
+    }
+
     setUserAddressData({
       address,
       city,
@@ -71,6 +134,7 @@ function BillingInfo({ userName, userEmail }) {
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
           </div>
           <div className='mt-2'>
             <label className="text-lg font-montserrat text-gray-500" htmlFor="city">City:</label>
@@ -82,6 +146,7 @@ function BillingInfo({ userName, userEmail }) {
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
           </div>
           <div className='mt-2'>
             <label className="text-lg font-montserrat text-gray-500" htmlFor="state">State:</label>
@@ -93,6 +158,7 @@ function BillingInfo({ userName, userEmail }) {
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
           </div>
           <div className='mt-2'>
             <label className="text-lg font-montserrat text-gray-500" htmlFor="country">Country:</label>
@@ -104,6 +170,7 @@ function BillingInfo({ userName, userEmail }) {
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
           </div>
           <div className='mt-2'>
             <label className="text-lg font-montserrat text-gray-500" htmlFor="pincode">Pincode:</label>
@@ -115,17 +182,19 @@ function BillingInfo({ userName, userEmail }) {
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.pincode && <p className="text-red-500 text-sm mt-1">{errors.pincode}</p>}
           </div>
           <div className='mt-2'>
             <label className="text-lg font-montserrat text-gray-500" htmlFor="phoneNumber">Phone Number:</label>
             <input
-              type="tel"
+              type="text"
               name="phoneNumber"
               id="phoneNumber"
               value={phoneNumber}
               onChange={handleInputChange}
               className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
             />
+            {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>}
           </div>
         </div>
       </div>
