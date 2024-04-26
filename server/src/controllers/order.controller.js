@@ -116,7 +116,7 @@ const newOrderBody = zod.object({
 
   const getAllOrders = asyncHandler(async (req, res) => {
   const userId = req.user._id;
-    const orders = await Order.find({ owner: userId});
+    const orders = await Order.find({ user: userId});
   
 
     if (!orders || orders.length === 0) {
