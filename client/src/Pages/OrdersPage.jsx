@@ -37,11 +37,11 @@ function OrdersPage() {
           <section >
             {loading ? (
               <section className='h-screen flex items-center justify-center'>
-              <p className='text-3xl  font-palanquin'>Loading...</p>
+              <p className='text-3xl font-montserrat text-gray-500'>Loading...</p>
               </section>
             ) : orders.length === 0 ? (
               <section className='h-screen flex items-center justify-center'>
-                <p className='text-3xl font-palanquin'>No Orders to show!</p>
+                <p className='text-3xl font-montserrat text-gray-500'>No Orders to show!</p>
               </section>
               
             ) : (
