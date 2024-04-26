@@ -3,17 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../Recoil/userAtoms';
 import { Logout } from '../Api/UserApi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DropdownMenu = () => {
   const navigate = useNavigate();
   const isLoggedIn = useRecoilValue(loginState);
 
+  const successToast = (message) => {
+    toast.success(message);
+  };
+  const failureToast = (message) => {
+    toast.error(message);
+  };
+
   const handleLogout = async () => {
     try {
       await Logout();
       window.location.reload();
+      successToast("Logout Successful!");
     } catch (error) {
-      console.log(error);
+      failureToast("Could not log out!")
     }
   };
 
@@ -48,6 +58,7 @@ const DropdownMenu = () => {
           </>
         )}
       </ul>
+      <ToastContainer/>
     </div>
   );
 };

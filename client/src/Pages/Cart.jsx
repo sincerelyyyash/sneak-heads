@@ -51,7 +51,7 @@ function Cart() {
             </section>
             <div className='flex justify-end mt-4'>
               <p className="text-black text-3xl font-semibold text-left font-Palanquin mr-4 ">Total: </p>
-              <p className="text-black text-xl mt-2 font-semibold text-left font-Palanquin ">₹ </p>
+              <p className="text-black text-xl mt-2 font-semibold text-left font-Palanquin ">₹</p>
               <p className="text-black text-3xl font-semibold text-left font-Palanquin"> {cartTotalValue.toFixed(2)}</p>
             </div>
           </div>

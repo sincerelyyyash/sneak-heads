@@ -5,6 +5,8 @@ import { emailAtom, fullnameAtom, passwordAtom } from '../Recoil/userAtoms';
 import { SignUp } from '../Api/UserApi.jsx';
 import Footer from '../sections/Footer.jsx';
 import Nav from '../Components/Nav.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
   const navigate = useNavigate();
@@ -12,6 +14,13 @@ function Signup() {
   const [email, setEmail] = useRecoilState(emailAtom);
   const [password, setPassword] = useRecoilState(passwordAtom);
   const [error, setError] = useState('');
+
+  const successToast = (message) => {
+    toast.success(message);
+  };
+  const failureToast = (message) => {
+    toast.error(message);
+  };
 
   const handleSignUp = async () => {
     if (!fullname || !email || !password) {
@@ -39,9 +48,12 @@ function Signup() {
 
     try {
       await SignUp(email, fullname, password);
-      navigate('/');
+      successToast("Signing up Successful!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     } catch (error) {
-      console.error('Error signing up:', error);
+      failureToast("Signup Failed!");
       setError('Error signing up. Please try again later.');
     }
   };
@@ -108,6 +120,7 @@ function Signup() {
       <section className="padding-x padding-t pb-8 bg-black">
         <Footer />
       </section>
+      <ToastContainer />
     </div>
   );
 }

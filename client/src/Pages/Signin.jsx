@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { SignIn } from '../Api/UserApi';
 import { emailAtom, passwordAtom } from '../Recoil/userAtoms';
-import Notification from '../Components/NotificationPopup';
 import Nav from '../Components/Nav';
 import { Footer } from '../sections';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signin() {
   const [email, setEmail] = useRecoilState(emailAtom);
@@ -13,6 +14,12 @@ function Signin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   
+  const successToast = (message) => {
+    toast.success(message);
+  };
+  const failureToast = (message) => {
+    toast.error(message);
+  };
 
   const handleSignIn = async (email, password) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,12 +30,13 @@ function Signin() {
 
     try {
       await SignIn(email, password);
-      navigate("/");
-      <Notification color="bg-green-500" message="Sign In successful" />
+      successToast("Login Successful!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     } catch (error) {
       setError('Invalid credentials. Please try again.');
-      <Notification color="bg-red-500" message="Sign in failed" />
-
+      failureToast("Login Failed!");
     }
   };
 
@@ -96,6 +104,7 @@ function Signin() {
       <section className="padding-x padding-t pb-8 bg-black">
         <Footer />
       </section>
+      <ToastContainer />
    </div>
   );
 }

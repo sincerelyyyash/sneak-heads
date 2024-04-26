@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { getProductDetails } from '../Api/ProductsApi'; 
 import SquareButton from './SquareButton';
 import { cancelOrder } from '../Api/OrdersApi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrderItemTile = ({ product }) => {
     const { name, imgURLs, quantity, subtotal } = product;
@@ -31,14 +33,21 @@ const OrderTile = ({ order }) => {
       total,
       _id,
     } = order;
+
+    const successToast = (message) => {
+        toast.success(message);
+      };
+      const failureToast = (message) => {
+        toast.error(message);
+      };
   
     const [productDetails, setProductDetails] = useState([]);
     const handleCancelOrder = async ({_id}) => {
         try {
           await cancelOrder(_id);
-
+            successToast("Order Cancelled!");
         } catch (error) {
-          console.error('Error cancelling order:', error);
+            failureToast("Order cancellation failed!");
         }
       };
   
@@ -81,6 +90,7 @@ const OrderTile = ({ order }) => {
             {shippingInfo.status !== 'Cancelled' && <SquareButton label={'Cancel Order'} onClick={() => handleCancelOrder(_id)}/>}
           </div>
         </div>
+      <ToastContainer />
       </div>
     );
 };

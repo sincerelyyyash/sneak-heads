@@ -7,6 +7,8 @@ import { Footer } from '../sections';
 import Nav from '../Components/Nav';
 import { getProductDetails } from '../Api/ProductsApi'; 
 import { addToCart } from '../Api/CartsApi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -15,6 +17,13 @@ const ProductDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
+
+  const successToast = (message) => {
+    toast.success(message);
+  };
+  const failureToast = (message) => {
+    toast.error(message);
+  };
   
 
   useEffect(() => {
@@ -49,10 +58,10 @@ const ProductDetailsPage = () => {
 
   const handleAddToCart = async (productId, quantity) => {
     try {
-      const response = await addToCart(productId, quantity);
-      console.log(response)
+      await addToCart(productId, quantity);
+      successToast("Product added to cart!");
     } catch (error) {
-      console.error(error);
+      failureToast("Could not add product to cart!");
     }
   };
 
@@ -109,6 +118,7 @@ const ProductDetailsPage = () => {
       <section className="padding-x padding-t pt-8 pb-8 bg-black ">
         <Footer/>
       </section>
+      <ToastContainer/>
     </div>
   );
 };
