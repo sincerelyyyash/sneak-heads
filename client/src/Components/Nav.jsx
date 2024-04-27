@@ -51,7 +51,7 @@ const Nav = () => {
               text-slate-gray'
               onClick={handleProfileClick}
             >
-              Profile
+              My Account
             </button>
             {showDropdown && <DropdownMenu />}
           </li>

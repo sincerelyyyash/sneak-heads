@@ -108,10 +108,10 @@ const ProductDetailsPage = () => {
             </div>
           </div>
           <div className="mt-11 flex flex-wrap gap-4">
-            <Button label="Add to cart" backgroundColor='bg-white' borderColor='border-slate-gray' textColor='text-slate-gray' onClick={()=>{
+            <Button label="Add to cart" backgroundColor='bg-white'  borderColor='border-gray-500' textColor='text-black' onClick={()=>{
               handleAddToCart(productId,quantity);
             }} />
-            <Button label='Shop Now' />
+            <Button label='Shop Now' backgroundColor='bg-white' borderColor='border-coral-red' textColor='text-coral-red' />
           </div>
         </div>
       </div>

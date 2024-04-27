@@ -40,9 +40,9 @@ const DropdownMenu = () => {
             <li className='mt-2'>
               <button onClick={() => navigate('/cart')}>View Cart</button>
             </li>
-            <li className='mt-2'>
+            {/* <li className='mt-2'>
               <button onClick={() => navigate('/profile')}>Profile Settings</button>
-            </li>
+            </li> */}
             <li className='mt-2'>
               <button onClick={handleLogout}>Logout</button>
             </li>

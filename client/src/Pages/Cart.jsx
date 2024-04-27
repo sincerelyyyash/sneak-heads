@@ -5,8 +5,8 @@ import CartTile from '../Components/CartTile';
 import { useRecoilValue } from 'recoil';
 import { cartItem, cartTotal } from '../Recoil/cartAtom';
 import { fetchCartItems } from '../Api/CartsApi';
-import SquareButton from '../Components/SquareButton';
 import { useNavigate } from 'react-router-dom';
+import Button from '../Components/Button';
 
 function Cart() {
   const { getAllProductsFromCart } = fetchCartItems();
@@ -33,7 +33,7 @@ function Cart() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-coral-red text-2xl font-semibold text-left font-montserrat">Shopping Cart</p>
             <div className='flex justify-end mb-4'>
-              <SquareButton label={"Checkout"} onClick={() => {
+              <Button square={true} label={"Checkout"} fullWidth={true} onClick={() => {
                 navigate('/checkout');
               }} />
             </div>
@@ -50,7 +50,7 @@ function Cart() {
               ))}
             </section>
             <div className='flex justify-end mt-4'>
-              <p className="text-black text-3xl font-semibold text-left font-Palanquin mr-4 ">Total: </p>
+              <p className="text-black text-3xl font-semibold text-left font-Palanquin mr-4 ">Subtotal: </p>
               <p className="text-black text-xl mt-2 font-semibold text-left font-Palanquin ">₹</p>
               <p className="text-black text-3xl font-semibold text-left font-Palanquin"> {cartTotalValue.toFixed(2)}</p>
             </div>

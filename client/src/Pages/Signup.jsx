@@ -103,7 +103,8 @@ function Signup() {
             {error && <p className="text-red-500 mt-2">{error}</p>}
             <button
               onClick={handleSignUp}
-              className='mt-5 bg-coral-red text-white font-bold text-xl h-12 rounded-lg'
+              className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+              hover:bg-coral-red font-bold text-xl h-12 rounded-lg'
             >
               Sign Up
             </button>

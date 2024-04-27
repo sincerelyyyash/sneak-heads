@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import SquareButton from './SquareButton';
 import { fetchCartItems, modifyProductQuantity, removeFromCart} from '../Api/CartsApi'; // Import cartTotal atom
 import { useRecoilState } from 'recoil'; 
 import { cartTotal } from '../Recoil/cartAtom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from './Button';
 
 
 const CartTile = ({ name, price, imgURLs, quantity, productId }) => {
@@ -83,7 +83,7 @@ const CartTile = ({ name, price, imgURLs, quantity, productId }) => {
             <button className="border border-gray-300 h-6 w-6 flex items-center justify-center bg-gray-100 text-black" onClick={handleIncreaseQuantity}>+</button>
           </div>
           <div className='m-2'>
-            <SquareButton label={"Remove"} onClick={handleRemoveFromCart} />
+            <Button square={true} label={"Remove"} onClick={handleRemoveFromCart} />
           </div>
         </div>
       </div>

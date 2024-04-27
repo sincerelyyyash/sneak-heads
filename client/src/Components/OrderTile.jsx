@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getProductDetails } from '../Api/ProductsApi'; 
-import SquareButton from './SquareButton';
 import { cancelOrder } from '../Api/OrdersApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,7 +86,7 @@ const OrderTile = ({ order }) => {
           <div className='m-8 p-2'>
             <p className="text-lg font-semibold font-montserrat mb-2">Total: ₹{total}</p>
             <p className="text-lg font-semibold font-palanquin mb-2">Status: {shippingInfo.status}</p>
-            {shippingInfo.status !== 'Cancelled' && <SquareButton label={'Cancel Order'} onClick={() => handleCancelOrder(_id)}/>}
+            {shippingInfo.status !== 'Cancelled' && <Button square={true} label={'Cancel Order'} onClick={() => handleCancelOrder(_id)}/>}
           </div>
         </div>
       <ToastContainer />

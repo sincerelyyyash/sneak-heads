@@ -84,7 +84,8 @@ function Signin() {
 
             <button
               onClick={() => handleSignIn(email, password)}
-              className='mt-5 bg-coral-red text-white border-coral-red font-bold text-xl h-12 rounded-lg'
+              className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+              hover:bg-coral-red font-bold text-xl h-12 rounded-lg'
             >
               Sign In
             </button>

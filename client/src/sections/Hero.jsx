@@ -39,6 +39,7 @@ const Hero = () => {
         </p>
         <Button label='Shop Now'
           iconURL={arrowRight}
+          square={true}
           onClick={()=>{
             navigate("/products")
           }}

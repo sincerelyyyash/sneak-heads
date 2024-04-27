@@ -77,7 +77,8 @@ function PaymentInfo() {
             <p className="text-lg font-palanquin">₹{total.toFixed(2)}</p>
           </div>
           {/* Proceed to pay button */}
-          <button className="bg-coral-red text-white font-bold text-xl h-12 rounded-lg mt-4">
+          <button className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+              hover:bg-coral-red font-bold text-xl h-12 rounded-lg'>
             Proceed to Pay
           </button>
         </div>
