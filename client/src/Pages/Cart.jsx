@@ -33,7 +33,7 @@ function Cart() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-coral-red text-2xl font-semibold text-left font-montserrat">Shopping Cart</p>
             <div className='flex justify-end mb-4'>
-              <Button square={true} label={"Checkout"} fullWidth={true} onClick={() => {
+              <Button square={true} label={"Checkout"} onClick={() => {
                 navigate('/checkout');
               }} />
             </div>

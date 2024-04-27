@@ -45,6 +45,11 @@ const orderSchema = new Schema({
         subtotal: {
             type: Number,
             required: true
+        },
+        size:{
+            type: Number,
+            required: true,
+            default: 6
         }
     }],
     user: {
