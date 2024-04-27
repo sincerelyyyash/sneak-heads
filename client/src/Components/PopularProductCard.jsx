@@ -19,7 +19,7 @@ const PopularProductCard = ({ imgURLs, name, price, productId }) => {
           <div className="p-4">
             <h3 className="mt-2 text-2xl leading-normal font-semibold font-palanquin h-20">{name}</h3>
             <div className='flex flex-row gap-4'>
-              <p className="mt-2 text-black text-xl leading-normal font-semibold font-palanquin">Rs. {price}</p>
+              <p className="mt-2 text-black text-xl leading-normal font-semibold font-palanquin">₹{price}</p>
               <Button square={true} label='View Details' fullWidth={true}/>
             </div>
           </div>
