@@ -17,6 +17,7 @@ const ProductDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
+  const [selectedSize, setSelectedSize] = useState(6); 
 
   const successToast = (message) => {
     toast.success(message);
@@ -77,6 +78,11 @@ const ProductDetailsPage = () => {
     }
   };
 
+  // Function to handle size selection
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+  };
+
   return (
     <div>
       <section className='pb-12'>
@@ -105,6 +111,20 @@ const ProductDetailsPage = () => {
               <button onClick={handleDecreaseQuantity} className="border border-gray-300 px-3 py-1">-</button>
               <span className='text-2xl font-normal'>{quantity}</span>
               <button onClick={handleIncreaseQuantity} className="border border-gray-300 px-3 py-1">+</button>
+            </div>
+          </div>
+          <div className="mt-4">
+            <h2 className='font-montserrat text-gray-600'>Size:</h2>
+            <div className="flex gap-2 mt-2">
+              {[6, 7, 8, 9, 10].map(size => (
+                <button
+                  key={size}
+                  className={`px-4 py-2 rounded-full ${selectedSize === size ? 'bg-coral-red text-white' : 'bg-white text-coral-red'} border border-gray-300`}
+                  onClick={() => handleSizeSelect(size)}
+                >
+                  {size}
+                </button>
+              ))}
             </div>
           </div>
           <div className="mt-11 flex flex-wrap gap-4">
