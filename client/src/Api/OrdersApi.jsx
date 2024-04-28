@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseUrl } from '../Constants';
+import { baseUrl, stripePublicKey } from '../Constants';
 import { loadStripe } from "@stripe/stripe-js";
 
 const newOrder = async (orderData) => {
@@ -39,7 +39,7 @@ const getAllOrders = async () => {
 const makeOrder = async (shippingInfo, cartItems) => {
 
   const stripe = await loadStripe(
-    "pk_test_51MK2RCSC4lsmbX4Li7HOOyMsDEqk3QRn4rYb7i9IFRyQci2NuCEDivoqrayPKK2avGNvJblyfMW6kMjlwTMoi5O700SKV4DtYA"
+    stripePublicKey
   );
 
   try {
