@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { cartItem } from '../Recoil/cartAtom';
-import {userAddress} from '../Recoil/userAtoms'
+import { userAddress } from '../Recoil/userAtoms';
 import { makeOrder } from '../Api/OrdersApi';
 import { fetchCartItems } from '../Api/CartsApi';
 
@@ -15,14 +15,13 @@ function PaymentInfo() {
   const cart = useRecoilValue(cartItem);
   const shippingInfo = useRecoilValue(userAddress);
 
-
-  const handlePay = async ()=>{
+  const handlePay = async () => {
     try {
       await makeOrder(shippingInfo, cart);
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   if (!Array.isArray(cart)) {
     return (
@@ -94,12 +93,10 @@ function PaymentInfo() {
             <p className="text-lg font-palanquin font-semibold">Total:</p>
             <p className="text-lg font-palanquin">₹{total.toFixed(2)}</p>
           </div>
-          <button 
-          onClick={()=>{
-            handlePay()
-          }}
-          className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
-              hover:bg-coral-red font-bold text-xl h-12 rounded-lg'>
+          <button
+            onClick={handlePay}
+            className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+              hover:bg-coral-red font-bold text-xl h-12 rounded-lg w-full sm:w-auto'>
             Proceed to pay
           </button>
         </div>

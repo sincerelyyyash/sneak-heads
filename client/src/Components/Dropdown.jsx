@@ -28,9 +28,8 @@ const DropdownMenu = () => {
   };
 
   return (
-    <div className="absolute center-0  w-48 bg-white 
-    rounded-lg shadow-lg flex flex-col p-1 font-montserrat 
-    leading-normal text-lg items-center text-slate-gray">
+    <div className={`absolute bg-white rounded-lg shadow-lg font-montserrat leading-normal text-lg text-slate-gray 
+      ${window.innerWidth < 768 ? 'right-2' : 'right-0'}  w-48 p-1 flex flex-col items-center`}>
       <ul>
         {isLoggedIn ? (
           <>
@@ -40,9 +39,6 @@ const DropdownMenu = () => {
             <li className='mt-2'>
               <button onClick={() => navigate('/cart')}>View Cart</button>
             </li>
-            {/* <li className='mt-2'>
-              <button onClick={() => navigate('/profile')}>Profile Settings</button>
-            </li> */}
             <li className='mt-2'>
               <button onClick={handleLogout}>Logout</button>
             </li>

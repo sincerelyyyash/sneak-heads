@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Nav from '../Components/Nav';
 import { Footer } from '../sections';
 import CartTile from '../Components/CartTile';
@@ -31,9 +31,9 @@ function Cart() {
             <Button label='Shop Now'
               square={true}
               onClick={()=>{
-              navigate("/products")
-            }}
-        />
+                navigate("/products")
+              }}
+            />
           </div>
         ) : (
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

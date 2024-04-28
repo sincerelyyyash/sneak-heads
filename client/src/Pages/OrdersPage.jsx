@@ -38,7 +38,7 @@ function OrdersPage() {
           <section >
             {loading ? (
               <section className='h-screen flex items-center justify-center'>
-              <p className='text-3xl font-montserrat text-gray-500'>Loading...</p>
+                <p className='text-3xl font-montserrat text-gray-500'>Loading...</p>
               </section>
             ) : orders.length === 0 ? (
               <section className='h-screen flex flex-col items-center justify-center'>
@@ -46,15 +46,16 @@ function OrdersPage() {
                 <Button label='Shop Now'
                   square={true}
                   onClick={()=>{
-                  navigate("/products")
-                }}
-        />
+                    navigate("/products")
+                  }}
+                />
               </section>
-              
             ) : (
-              orders.slice().reverse().map((order, index) => (
-                <OrderTile key={index} order={order} />
-              ))
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {orders.slice().reverse().map((order, index) => (
+                  <OrderTile key={index} order={order} />
+                ))}
+              </div>
             )}
           </section>
         </div>

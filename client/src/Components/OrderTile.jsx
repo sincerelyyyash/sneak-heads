@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from './Button';
 
-
 const OrderItemTile = ({ product }) => {
     const { name, imgURLs, quantity, subtotal } = product;
   
@@ -42,16 +41,16 @@ const OrderTile = ({ order }) => {
       const failureToast = (message) => {
         toast.error(message);
       };
-  
+
     const [productDetails, setProductDetails] = useState([]);
-    const handleCancelOrder = async ({_id}) => {
+    const handleCancelOrder = async (orderId) => {
         try {
-          await cancelOrder(_id);
-            successToast("Order Cancelled!");
+          await cancelOrder(orderId);
+          successToast("Order Cancelled!");
         } catch (error) {
             failureToast("Order cancellation failed!");
         }
-      };
+    };
   
     useEffect(() => {
       const fetchProductDetails = async () => {
@@ -72,7 +71,7 @@ const OrderTile = ({ order }) => {
   
     return (
       <div className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-300 py-4">
-        <div className="flex gap-4 mb-4 sm:mb-0 p-4 justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 mb-4 p-4 sm:justify-between w-full">
           <div>
             <h3 className="text-lg font-semibold mt-4 mb-2">Order Items</h3>
             <div className='mb-4'>
@@ -88,13 +87,13 @@ const OrderTile = ({ order }) => {
             <p className="text-gray-500 font-palanquin">Shipping Charge: ₹{shippingCharge}</p>
             <p className="text-gray-500 font-palanquin">Discount: ₹{discount}</p>
           </div>
-          <div className='m-8 p-2'>
+          <div className='flex flex-col justify-between sm:m-8 sm:p-2'>
             <p className="text-lg font-semibold font-montserrat mb-2">Total: ₹{total}</p>
             <p className="text-lg font-semibold font-palanquin mb-2">Status: {shippingInfo.status}</p>
             {shippingInfo.status !== 'Cancelled' && <Button square={true} label={'Cancel Order'} onClick={() => handleCancelOrder(_id)}/>}
           </div>
         </div>
-      <ToastContainer />
+        <ToastContainer />
       </div>
     );
 };

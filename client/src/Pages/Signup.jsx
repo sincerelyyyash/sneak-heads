@@ -51,7 +51,7 @@ function Signup() {
       successToast("Signing up Successful!");
       setTimeout(() => {
         navigate("/");
-      }, 2500);
+      }, 1500);
     } catch (error) {
       failureToast("Signup Failed!");
       setError('Error signing up. Please try again later.');
@@ -60,64 +60,64 @@ function Signup() {
 
   return (
     <div>
-      <Nav/>
+      <Nav />
       <div className='flex justify-center py-20 pt-36'>
-      <div className="w-full p-5 shadow-2xl lg:max-w-lg mt-10 rounded-lg">
-        <div className="space-y-2">
-          <div className='flex flex-col px-10 py-10'>
-            <h3 className='flex justify-center text-coral-red text-4xl font-bold'>
-              Sign Up
-            </h3>
-            <p className='flex justify-center mt-4 text-gray-500 text-xl'>
-              Enter your information to create an account
-            </p>
-            <p className='mt-5 font-bold text-lg'>Full Name</p>
-            <input
-              type="text"
-              name="fullName"
-              id="fullname"
-              placeholder='Tony Stark'
-              value={fullname}
-              onChange={(e) => setFullName(e.target.value)}
-              className='w-full border border-gray-300 h-10  mt-3 rounded-lg p-2'
-            />
-            <p className='mt-5 font-bold text-lg'>Email</p>
-            <input
-              type='email'
-              name="email"
-              id="email"
-              placeholder='tony@example.com'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className='w-full border border-gray-300 h-10  mt-3 rounded-lg p-2'
-            />
-            <p className='mt-5 font-bold text-lg'>Password</p>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className='w-full border border-gray-300 h-10  mt-3 rounded-lg p-2'
-            />
-            {error && <p className="text-red-500 mt-2">{error}</p>}
-            <button
-              onClick={handleSignUp}
-              className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+        <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 p-5 shadow-2xl mt-10 rounded-lg">
+          <div className="space-y-2">
+            <div className='flex flex-col px-10 py-10'>
+              <h3 className='flex justify-center text-coral-red text-4xl font-bold'>
+                Sign Up
+              </h3>
+              <p className='flex justify-center mt-4 text-gray-500 text-xl'>
+                Enter your information to create an account
+              </p>
+              <p className='mt-5 font-bold text-lg'>Full Name</p>
+              <input
+                type="text"
+                name="fullName"
+                id="fullname"
+                placeholder='Tony Stark'
+                value={fullname}
+                onChange={(e) => setFullName(e.target.value)}
+                className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
+              />
+              <p className='mt-5 font-bold text-lg'>Email</p>
+              <input
+                type='email'
+                name="email"
+                id="email"
+                placeholder='tony@example.com'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
+              />
+              <p className='mt-5 font-bold text-lg'>Password</p>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
+              />
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+              <button
+                onClick={handleSignUp}
+                className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
               hover:bg-coral-red font-bold text-xl h-12 rounded-lg'
-            >
-              Sign Up
-            </button>
-            <div className='flex flex-row mt-4 justify-center gap-1'>
-              <p>Already have an account?</p>
-              <button className='font-bold underline text-coral-red' onClick={() => navigate("/signin")}>
-                Login
+              >
+                Sign Up
               </button>
+              <div className='flex flex-row mt-4 justify-center gap-1'>
+                <p>Already have an account?</p>
+                <button className='font-bold underline text-coral-red' onClick={() => navigate("/signin")}>
+                  Login
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
       <section className="padding-x padding-t pb-8 bg-black">
         <Footer />
       </section>

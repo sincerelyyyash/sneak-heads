@@ -71,7 +71,7 @@ const CartTile = ({ name, price, imgURLs, quantity, productId }) => {
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-300 py-4">
-      <div className="flex items-center gap-4 mb-4 sm:mb-0 w-1/2">
+      <div className="flex items-center gap-4 mb-4 sm:mb-0 w-full sm:w-auto">
         <img src={imgURL} alt={name} className="w-16 h-16 object-cover rounded-md" />
         <div>
           <p className="text-lg font-semibold">{name}</p>
@@ -82,7 +82,7 @@ const CartTile = ({ name, price, imgURLs, quantity, productId }) => {
             <p className="text-gray-500">{currentQuantity}</p>
             <button className="border border-gray-300 h-6 w-6 flex items-center justify-center bg-gray-100 text-black" onClick={handleIncreaseQuantity}>+</button>
           </div>
-          <div className='m-2'>
+          <div className='mt-2 sm:mt-0'>
             <Button square={true} label={"Remove"} onClick={handleRemoveFromCart} />
           </div>
         </div>

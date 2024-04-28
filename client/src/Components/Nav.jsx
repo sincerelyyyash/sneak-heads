@@ -43,7 +43,7 @@ const Nav = () => {
             navigate("/products")
         }}>Products</button>
           </li>
-          <li>
+          <li> 
             <button 
               className='font-montserrat
               leading-normal
@@ -61,7 +61,8 @@ const Nav = () => {
        
         <div className='hidden 
         max-lg:block'>
-          <img src={hamburger} alt='hamburger icon' width={25} height={25} />
+          <img src={hamburger} alt='hamburger icon' width={25} height={25} onClick={handleProfileClick} />
+          {showDropdown && <DropdownMenu />}
         </div>
       </nav>
     </header>
