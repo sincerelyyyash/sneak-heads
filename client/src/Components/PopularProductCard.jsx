@@ -8,7 +8,7 @@ const PopularProductCard = ({ imgURLs, name, price, productId }) => {
   const firstImage = imgURLs && imgURLs.length > 0 ? imgURLs[0] : '';
 
   return (
-    <div className={`border rounded-lg overflow-hidden flex justify-center bg-gray-50 ${isHovered ? 'border-coral-red' : 'border-gray-300'} ${isHovered ? 'hover:scale-105' : ''}`}>
+    <div className={`border rounded-lg overflow-hidden flex justify-center bg-gray-100 ${isHovered ? 'border-coral-red' : 'border-gray-300'} ${isHovered ? 'hover:scale-105' : ''}`}>
       <div
         className={`product-card`}
         onMouseEnter={() => setIsHovered(true)}

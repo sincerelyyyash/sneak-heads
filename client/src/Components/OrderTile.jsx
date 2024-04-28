@@ -33,6 +33,7 @@ const OrderTile = ({ order }) => {
       discount,
       total,
       _id,
+      createdAt,
     } = order;
 
     const successToast = (message) => {
@@ -80,6 +81,8 @@ const OrderTile = ({ order }) => {
               ))}
             </div>
             <p className="text-lg font-semibold font-palanquin">Shipping Address: {shippingInfo.address}, {shippingInfo.city}, {shippingInfo.state}, {shippingInfo.country}, {shippingInfo.pincode}</p>
+            <p className="text-md font-semibold font-palanquin">Order placed on: {createdAt.slice(0, 10)}</p>
+            <p className="text-gray-500 font-palanquin">Order Id: {_id}</p>
             <p className="text-gray-500 font-palanquin">Subtotal: ₹{subtotal}</p>
             <p className="text-gray-500 font-palanquin">Tax: ₹{tax}</p>
             <p className="text-gray-500 font-palanquin">Shipping Charge: ₹{shippingCharge}</p>

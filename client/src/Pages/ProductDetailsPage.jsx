@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageOptions from '../Components/ProductImagesOptions';
 import Button from '../Components/Button';
 import ProductNotfound from '../Components/ProductNotfound';
@@ -18,6 +18,7 @@ const ProductDetailsPage = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedSize, setSelectedSize] = useState(6); 
+  const navigate = useNavigate()
 
   const successToast = (message) => {
     toast.success(message);
@@ -66,6 +67,16 @@ const ProductDetailsPage = () => {
     }
   };
 
+  const handleBuyNow = async (productId, quantity) => {
+    try {
+      await addToCart(productId, quantity);
+      navigate('/checkout')
+    } catch (error) {
+      console.log(error)
+      failureToast("Failed to shop now");
+    }
+  }
+
   const handleIncreaseQuantity = () => {
     if (quantity < 10) {
       setQuantity(prevQuantity => prevQuantity + 1);
@@ -78,7 +89,7 @@ const ProductDetailsPage = () => {
     }
   };
 
-  // Function to handle size selection
+
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
@@ -131,7 +142,9 @@ const ProductDetailsPage = () => {
             <Button label="Add to cart" backgroundColor='bg-white'  borderColor='border-gray-500' textColor='text-black' onClick={()=>{
               handleAddToCart(productId,quantity);
             }} />
-            <Button label='Shop Now' backgroundColor='bg-white' borderColor='border-coral-red' textColor='text-coral-red' />
+            <Button label='Shop Now' backgroundColor='bg-white' borderColor='border-coral-red' textColor='text-coral-red' onClick={()=>{
+              handleBuyNow(productId,quantity);
+            }}/>
           </div>
         </div>
       </div>

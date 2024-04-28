@@ -3,6 +3,7 @@ import Nav from '../Components/Nav';
 import { Footer } from '../sections';
 import OrderTile from '../Components/OrderTile'; 
 import { getAllOrders } from '../Api/OrdersApi';
+import Button from '../Components/Button';
 
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -40,12 +41,18 @@ function OrdersPage() {
               <p className='text-3xl font-montserrat text-gray-500'>Loading...</p>
               </section>
             ) : orders.length === 0 ? (
-              <section className='h-screen flex items-center justify-center'>
+              <section className='h-screen flex flex-col items-center justify-center'>
                 <p className='text-3xl font-montserrat text-gray-500'>No Orders to show!</p>
+                <Button label='Shop Now'
+                  square={true}
+                  onClick={()=>{
+                  navigate("/products")
+                }}
+        />
               </section>
               
             ) : (
-              orders.map((order, index) => (
+              orders.slice().reverse().map((order, index) => (
                 <OrderTile key={index} order={order} />
               ))
             )}

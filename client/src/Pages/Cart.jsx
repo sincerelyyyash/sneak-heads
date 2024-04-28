@@ -26,8 +26,14 @@ function Cart() {
       <Nav />
       <div className='py-20 pt-40'>
         {isEmpty ? (
-          <div className="flex justify-center items-center h-screen">
+          <div className="flex justify-center items-center h-screen flex-col">
             <p className="text-3xl font-montserrat text-gray-500">Your cart is empty ;(</p>
+            <Button label='Shop Now'
+              square={true}
+              onClick={()=>{
+              navigate("/products")
+            }}
+        />
           </div>
         ) : (
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
