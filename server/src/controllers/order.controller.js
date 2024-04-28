@@ -127,8 +127,8 @@ const newOrderBody = zod.object({
         payment_method_types:["card"],
         line_items:lineItems,
         mode:"payment",
-        success_url:"http://localhost:5173/",
-        cancel_url:"http://localhost:5173/",
+        success_url: process.env.CORS_ORIGIN + "/orders",
+        cancel_url:  process.env.CORS_ORIGIN + "/orders",
     })
     
     const order = await Order.create({
