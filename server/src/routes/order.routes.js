@@ -1,6 +1,6 @@
 import { Router} from "express";
 import { isAdmin, verifyJWT } from "../middlewares/auth.middleware.js";
-import { cancelOrder, getAllOrders, newOrder } from "../controllers/order.controller.js";
+import { cancelOrder, getAllOrders, newOrder, stripeCheckout } from "../controllers/order.controller.js";
 
 
 const router = Router();
@@ -11,6 +11,6 @@ router.route("/cancel-order").post(verifyJWT ,cancelOrder)
 
 router.route("/all-orders").get(verifyJWT ,getAllOrders)
 
-
+router.route("/create-checkout-session").post(verifyJWT, stripeCheckout)
 
 export default router

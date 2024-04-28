@@ -26,7 +26,7 @@ const orderSchema = new Schema({
         },
         status: {
             type: String,
-            enum: ["Processing", "Shipped", "Delivered", "Cancelled"],
+            enum: ["Processing", "Processed", "Shipped", "Delivered", "Cancelled"],
             default: "Processing"
         }
     },
@@ -48,7 +48,6 @@ const orderSchema = new Schema({
         },
         size:{
             type: Number,
-            required: true,
             default: 6
         }
     }],

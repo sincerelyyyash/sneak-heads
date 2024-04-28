@@ -4,6 +4,10 @@ import zod from "zod";
 import { Order } from "../models/order.model.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { Cart } from "../models/cart.model.js";
+import Stripe from 'stripe';
+import stripePackage from 'stripe';
+
+const stripe = stripePackage(process.env.STRIPE_SECRET_KEY);
 
 const newOrderBody = zod.object({
     shippingInfo: zod.object({
@@ -82,6 +86,76 @@ const newOrderBody = zod.object({
     );
   });
   
+  const stripeCheckout = asyncHandler(async(req, res)=>{
+    const userId = req.user._id;
+
+    let cart = await Cart.findOne({owner: userId});
+
+    if(!cart){
+      throw new ApiError(400, "Cart not found");
+    }
+    
+    if (cart.products.length === 0){
+      console.log("error1")
+      return res.status(400).json(
+        new ApiResponse(400, "Cart is empty")
+      );
+    }
+
+    const {shippingInfo, lineItems} = req.body;
+
+    if (!shippingInfo) {
+      console.log("error2")
+      throw new ApiError(400, "Please provide all required fields");
+    }
+
+    const orderItems = cart.products.map((item) => ({
+      product: item.product,
+      quantity: item.quantity,
+      subtotal: item.subtotal,
+    }));
+
+    const subtotal = cart.total;
+    const tax = 0;
+    const shippingCharge = 0;
+    const discount = 0;
+    const total = cart.total;
+
+    try {
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types:["card"],
+        line_items:lineItems,
+        mode:"payment",
+        success_url:"http://localhost:5173/",
+        cancel_url:"http://localhost:5173/",
+    })
+    
+    const order = await Order.create({
+      shippingInfo,
+      orderItems,
+      user: userId,
+      subtotal,
+      tax,
+      shippingCharge,
+      discount,
+      total,
+    });
+
+    if (order) {
+      cart.products = [];
+      await cart.save();
+    }
+    return res.status(200).json(
+      new ApiResponse(200, "Order created successfully", {id: session.id})
+    );
+    } catch (error) {
+      console.error("Error during order creation:", error);
+      res.status(200).json(
+        new ApiError(400, "Order creation failed")
+      )
+    }
+  })
 
   const cancelOrder = asyncHandler(async (req, res) => {
     const userId = req.user._id;
@@ -131,4 +205,4 @@ const newOrderBody = zod.object({
   
   
 
-export { newOrder, cancelOrder, getAllOrders };
+export { newOrder, cancelOrder, getAllOrders, stripeCheckout };

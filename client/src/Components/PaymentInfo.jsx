@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useRecoilValue } from 'recoil';
 import { cartItem } from '../Recoil/cartAtom';
+import { userAddress } from '../Recoil/userAtoms';
+import { makeOrder } from '../Api/OrdersApi';
 
 function PaymentInfo() {
+  const [loading, setLoading] = useState(false);
   const cart = useRecoilValue(cartItem);
-  console.log(cart);
+  const shippingInfo = useRecoilValue(userAddress);
+
+  const handlePay = async () => {
+    try {
+      setLoading(true);
+      await makeOrder(shippingInfo, cart);
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!Array.isArray(cart)) {
     return (
       <div className="w-full p-5 shadow-lg lg:max-w-lg mt-10 rounded-lg bg-white">
         <div className="space-y-2">
-          <div className='flex flex-col px-10 py-10 m-4'>
-            <h3 className='flex justify-center text-coral-red text-3xl font-palanquin'>
+          <div className="flex flex-col px-10 py-10 m-4">
+            <h3 className="flex justify-center text-coral-red text-3xl font-palanquin">
               Your Order
             </h3>
             <p className="text-lg font-palanquin">No items in the cart.</p>
@@ -24,7 +39,7 @@ function PaymentInfo() {
   const items = cart.map(item => ({
     ...item.product,
     quantity: item.quantity,
-    totalPrice: item.product.price * item.quantity
+    totalPrice: item.product.price * item.quantity,
   }));
 
   const subtotal = items.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -39,8 +54,8 @@ function PaymentInfo() {
   return (
     <div className="w-full p-5 shadow-lg lg:max-w-lg mt-10 rounded-lg bg-white">
       <div className="space-y-2">
-        <div className='flex flex-col px-10 py-10 m-4'>
-          <h3 className='flex justify-center text-coral-red text-3xl font-palanquin'>
+        <div className="flex flex-col px-10 py-10 m-4">
+          <h3 className="flex justify-center text-coral-red text-3xl font-palanquin">
             Your Order
           </h3>
 
@@ -52,7 +67,9 @@ function PaymentInfo() {
           {/* List of products */}
           {items.map((item, index) => (
             <div key={index} className="flex justify-between items-center mt-4">
-              <p className="text-lg font-palanquin">{item.name} x {item.quantity}</p>
+              <p className="text-lg font-palanquin">
+                {item.name} x {item.quantity}
+              </p>
               <p className="text-lg font-palanquin">₹{item.totalPrice.toFixed(2)}</p>
             </div>
           ))}
@@ -76,10 +93,13 @@ function PaymentInfo() {
             <p className="text-lg font-palanquin font-semibold">Total:</p>
             <p className="text-lg font-palanquin">₹{total.toFixed(2)}</p>
           </div>
-          {/* Proceed to pay button */}
-          <button className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
-              hover:bg-coral-red font-bold text-xl h-12 rounded-lg'>
-            Proceed to Pay
+          <button
+            onClick={handlePay}
+            className="mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
+              hover:bg-coral-red font-bold text-xl h-12 rounded-lg"
+            disabled={loading} // Disable button when loading
+          >
+            {loading ? <CircularProgress size={24} /> : 'Proceed to pay'}
           </button>
         </div>
       </div>

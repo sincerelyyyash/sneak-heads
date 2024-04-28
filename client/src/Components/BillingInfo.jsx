@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userAddress } from '../Recoil/userAtoms'; 
 
@@ -49,7 +49,17 @@ function BillingInfo({ userName, userEmail }) {
         break;
     }
   };
-  
+
+  useEffect(() => {
+    setUserAddressData({
+      address,
+      city,
+      state,
+      country,
+      pincode,
+      phoneNumber
+    });
+  }, [address, city, state, country, pincode, phoneNumber, setUserAddressData]);
 
   const validateForm = () => {
     let valid = true;
@@ -94,21 +104,6 @@ function BillingInfo({ userName, userEmail }) {
 
     setErrors(newErrors);
     return valid;
-  };
-
-  const updateAddressData = () => {
-    if (!validateForm()) {
-      return;
-    }
-
-    setUserAddressData({
-      address,
-      city,
-      state,
-      country,
-      pincode,
-      phoneNumber
-    });
   };
 
   return (
