@@ -27,6 +27,7 @@ Full Stack Sneaker E-Commerce Web App built using MERN Stack with Stripe Payment
 4. Update base URL:
     - Navigate to `client/src/Constants/index.js`
     - Replace the base URL with your server's base URL or localhost URL with port.
+    - Replace the stripePublicKey value with your own Stripe Public Key
 5. Start the project:
     ```bash
     npm run dev
