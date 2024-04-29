@@ -18,6 +18,11 @@ const newOrderBody = zod.object({
       pincode: zod.number(),
       status: zod.enum(["Processing", "Shipped", "Delivered", "Cancelled"]),
     }),
+    subtotal: zod.number(),
+    tax: zod.number(),
+    shippingCharge: zod.number(),
+    discount: zod.number(),
+    total: zod.number(),
   });
 
   const cancelOrderBody = zod.object({
@@ -41,7 +46,7 @@ const newOrderBody = zod.object({
       );
     }
 
-    const { shippingInfo } = req.body;
+    const { shippingInfo, subtotal, tax, shippingCharge, discount, total } = req.body;
   
     const { success, error } = newOrderBody.safeParse(req.body);
     if (!success) {
@@ -50,15 +55,9 @@ const newOrderBody = zod.object({
       );
     }
   
-    if (!shippingInfo ) {
-      throw new ApiError(400, "Please provide required fields");
+    if (!shippingInfo || !subtotal || !tax || !total) {
+      throw new ApiError(400, "Please provide all required fields");
     }
-
-    const subtotal = cart.total;
-    const tax = 0;
-    const shippingCharge = 0;
-    const discount = 0;
-    const total = cart.total;
 
     const orderItems = cart.products.map((item) => ({
       product: item.product,
@@ -88,8 +87,39 @@ const newOrderBody = zod.object({
   });
   
   const stripeCheckout = asyncHandler(async(req, res)=>{
+    const userId = req.user._id;
 
-    const {lineItems} = req.body;
+    let cart = await Cart.findOne({owner: userId});
+
+    if(!cart){
+      throw new ApiError(400, "Cart not found");
+    }
+    
+    if (cart.products.length === 0){
+      console.log("error1")
+      return res.status(400).json(
+        new ApiResponse(400, "Cart is empty")
+      );
+    }
+
+    const {shippingInfo, lineItems} = req.body;
+
+    if (!shippingInfo) {
+      console.log("error2")
+      throw new ApiError(400, "Please provide all required fields");
+    }
+
+    const orderItems = cart.products.map((item) => ({
+      product: item.product,
+      quantity: item.quantity,
+      subtotal: item.subtotal,
+    }));
+
+    const subtotal = cart.total;
+    const tax = subtotal * 0.1;
+    const shippingCharge = 49;
+    const discount = 0;
+    const total = cart.total;
 
     try {
 
@@ -100,13 +130,28 @@ const newOrderBody = zod.object({
         success_url: process.env.CORS_ORIGIN + "/orders",
         cancel_url:  process.env.CORS_ORIGIN + "/orders",
     })
+    
+    const order = await Order.create({
+      shippingInfo,
+      orderItems,
+      user: userId,
+      subtotal,
+      tax,
+      shippingCharge,
+      discount,
+      total,
+    });
 
+    if (order) {
+      cart.products = [];
+      await cart.save();
+    }
     return res.status(200).json(
-      new ApiResponse(200, "Payment initiation successful", {id: session.id})
+      new ApiResponse(200, "Order created successfully", {id: session.id})
     );
     } catch (error) {
       res.status(200).json(
-        new ApiError(400, "Payment initiation failed")
+        new ApiError(400, "Order creation failed")
       )
     }
   })
