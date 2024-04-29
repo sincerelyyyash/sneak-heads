@@ -1,1 +1,0 @@
-import{p as e,i as o,j as s}from"./Nav-CkdNGOcW.js";import{d}from"./index-CWt01uhK.js";const p=()=>{const a=d(e);return{getProducts:async()=>{try{const c=(await o.get(s+"/product/allproducts")).data;a(c)}catch(r){throw r}}}},i=async a=>{try{const t=await o.get(`${s}/product/get-products`,{params:{productId:a}}),{data:r}=t.data;return r}catch(t){throw t}};export{i as g,p as u};
