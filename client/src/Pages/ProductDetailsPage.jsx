@@ -72,7 +72,7 @@ const ProductDetailsPage = () => {
       await addToCart(productId, quantity);
       navigate('/checkout')
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       failureToast("Failed to shop now");
     }
   }

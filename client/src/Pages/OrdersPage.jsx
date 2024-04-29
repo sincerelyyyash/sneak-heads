@@ -17,10 +17,10 @@ function OrdersPage() {
           const orders = orderDetails.message.orders;
           setOrders(orders); 
         } else {
-          console.error('Failed to retrieve orders:', orderDetails.message);
+          // console.error('Failed to retrieve orders:', orderDetails.message);
         }
       } catch (error) {
-        console.error('Error fetching orders:', error);
+        // console.error('Error fetching orders:', error);
       } finally {
         setLoading(false); 
       }

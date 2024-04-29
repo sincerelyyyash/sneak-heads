@@ -60,7 +60,7 @@ const OrderTile = ({ order }) => {
             const productDetail = await getProductDetails(item.product);
             details.push({ ...productDetail, quantity: item.quantity, subtotal: item.subtotal });
           } catch (error) {
-            console.error('Error fetching product details:', error);
+            // console.error('Error fetching product details:', error);
           }
         }
         setProductDetails(details);

@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch }) => {
       const products = await getBulkProducts(query);
       setResults(products);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
