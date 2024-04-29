@@ -1,4 +1,4 @@
-import{j as e}from"./index-Bjvdj6dT.js";const b=({label:o,iconURL:r,backgroundColor:t,textColor:l,borderColor:a,fullWidth:s,onClick:n,square:f})=>{const i=f?"rounded-lg":"rounded-full";return e.jsxs("button",{className:`before:ease relative h-12 w-40 overflow-hidden 
+import{j as e}from"./index-DI_G-4oe.js";const b=({label:o,iconURL:r,backgroundColor:t,textColor:l,borderColor:a,fullWidth:s,onClick:n,square:f})=>{const i=f?"rounded-lg":"rounded-full";return e.jsxs("button",{className:`before:ease relative h-12 w-40 overflow-hidden 
       border-coral-red shadow-2xl before:absolute before:left-0 before:-ml-2 
       before:h-48 before:w-48 before:origin-top-right before:-translate-x-full 
       before:translate-y-12 before:-rotate-90 before:bg-white before:transition-all 
