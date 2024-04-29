@@ -2,7 +2,8 @@ import { facebook, instagram, shieldTick, support, truckFast, twitter } from "..
 import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3, notFoundImage } from "../assets/images";
 
 
-export const baseUrl = 'http://localhost:8000/api/v1'
+// export const baseUrl = 'http://localhost:8000/api/v1'
+export const baseUrl = 'https://sneak-heads.onrender.com/api/v1'
 export const stripePublicKey = "pk_test_51MK2RCSC4lsmbX4Li7HOOyMsDEqk3QRn4rYb7i9IFRyQci2NuCEDivoqrayPKK2avGNvJblyfMW6kMjlwTMoi5O700SKV4DtYA"
 
 export const shoes = [

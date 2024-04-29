@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { cartItem } from '../Recoil/cartAtom';
 import { userAddress } from '../Recoil/userAtoms';
-import { makeOrder } from '../Api/OrdersApi';
+import { makeOrder, newOrder } from '../Api/OrdersApi';
 import { fetchCartItems } from '../Api/CartsApi';
 
 function PaymentInfo() {
@@ -17,7 +17,12 @@ function PaymentInfo() {
 
   const handlePay = async () => {
     try {
-      await makeOrder(shippingInfo, cart);
+      const orderResult = await makeOrder(cart);
+      if (orderResult.success) {
+        await newOrder(shippingInfo);
+      } else {
+        throw new Error('Failed to create order');
+      }
     } catch (error) {
       throw error;
     }

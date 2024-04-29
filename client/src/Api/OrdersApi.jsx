@@ -2,9 +2,9 @@ import axios from 'axios';
 import { baseUrl, stripePublicKey } from '../Constants';
 import { loadStripe } from "@stripe/stripe-js";
 
-const newOrder = async (orderData) => {
+const newOrder = async (shippingInfo,) => {
   try {
-    const response = await axios.post(`${baseUrl}/order/new-order`, orderData, {
+    const response = await axios.post(`${baseUrl}/order/new-order`, shippingInfo, {
       withCredentials: true,
     });
     return response.data;
@@ -36,7 +36,7 @@ const getAllOrders = async () => {
 };
 
 
-const makeOrder = async (shippingInfo, cartItems) => {
+const makeOrder = async (cartItems) => {
 
   const stripe = await loadStripe(
     stripePublicKey
@@ -56,7 +56,6 @@ const makeOrder = async (shippingInfo, cartItems) => {
 
     
     const response = await axios.post(`${baseUrl}/order/create-checkout-session`, {
-      shippingInfo,
       lineItems,
     }, {
       withCredentials: true,

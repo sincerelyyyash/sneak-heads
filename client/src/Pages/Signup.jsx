@@ -62,7 +62,7 @@ function Signup() {
     <div>
       <Nav />
       <div className='flex justify-center py-20 pt-36'>
-        <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 p-5 shadow-2xl mt-10 rounded-lg">
+        <div className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-5 shadow-2xl mt-10 rounded-lg">
           <div className="space-y-2">
             <div className='flex flex-col px-10 py-10'>
               <h3 className='flex justify-center text-coral-red text-4xl font-bold'>
