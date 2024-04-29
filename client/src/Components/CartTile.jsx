@@ -82,7 +82,7 @@ const CartTile = ({ name, price, imgURLs, quantity, productId }) => {
             <p className="text-gray-500">{currentQuantity}</p>
             <button className="border border-gray-300 h-6 w-6 flex items-center justify-center bg-gray-100 text-black" onClick={handleIncreaseQuantity}>+</button>
           </div>
-          <div className='mt-2 sm:mt-0'>
+          <div className='lg:mt-2 sm:mt-0'>
             <Button square={true} label={"Remove"} onClick={handleRemoveFromCart} />
           </div>
         </div>

@@ -15,7 +15,7 @@ export const useGetProducts = () => {
             const data = productDetails.data;
             setProductData(data);
         } catch (error) {
-            throw error;
+            // throw error;
         }
     }
 
@@ -33,7 +33,7 @@ export const getProductDetails = async (productId) => {
       const { data } = response.data; 
       return data;
     } catch (error) {
-      throw error;
+      // throw error;
     }
   };
 
@@ -47,7 +47,7 @@ export const getProductDetails = async (productId) => {
       const data = productDetails.data;
       return data;
     } catch (error) {
-      throw error;
+      // throw error;
     }
   }
   

@@ -9,7 +9,7 @@ const newOrder = async (shippingInfo,) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -20,7 +20,7 @@ const cancelOrder = async (orderId) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -31,12 +31,12 @@ const getAllOrders = async () => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
 
-const makeOrder = async (cartItems) => {
+const makeOrder = async (cartItems, shippingInfo) => {
 
   const stripe = await loadStripe(
     stripePublicKey
@@ -56,6 +56,7 @@ const makeOrder = async (cartItems) => {
 
     
     const response = await axios.post(`${baseUrl}/order/create-checkout-session`, {
+      shippingInfo,
       lineItems,
     }, {
       withCredentials: true,
@@ -71,10 +72,10 @@ const makeOrder = async (cartItems) => {
 
   
     if (result.error) {
-      throw new Error('Redirect to checkout failed');
+      // throw new Error('Redirect to checkout failed');
     }
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 

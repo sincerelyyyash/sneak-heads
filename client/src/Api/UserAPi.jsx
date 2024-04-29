@@ -16,7 +16,7 @@ export const SignUp = async (email, fullname, password) => {
     });
     Cookies.set("accessToken", response.data.accessToken);
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -32,7 +32,7 @@ export const SignIn = async (email, password) => {
     });
     Cookies.set("accessToken", response.data.accessToken);
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -43,7 +43,7 @@ export const Logout = async () => {
     });
     Cookies.remove("accessToken");
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -56,7 +56,7 @@ export const changePassword = async (oldPassword, newPassword) => {
       withCredentials: true,
     });
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -68,7 +68,7 @@ export const changeEmail = async (email) => {
       withCredentials: true,
     });
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -87,7 +87,7 @@ export const fetchUser = ()=>{
       setUserName(fullname);
       setEmail(email);
     } catch (error) {
-      throw error;
+      // throw error;
     }
   };
   

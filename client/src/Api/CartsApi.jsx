@@ -10,7 +10,7 @@ const addToCart = async (productId, quantity) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -21,7 +21,7 @@ const modifyProductQuantity = async (productId, quantity) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -32,7 +32,7 @@ const removeFromCart = async (productId) => {
     });
     return response.data;
   } catch (error) {
-    throw error;
+    // throw error;
   }
 };
 
@@ -49,7 +49,7 @@ const fetchCartItems = () => {
       setCartItems(products);
       setCartTotal(total);
     } catch (error) {
-      throw error;
+      // throw error;
     }
   };
 

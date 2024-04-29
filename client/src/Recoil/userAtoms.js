@@ -40,4 +40,7 @@ export const userAddress = atom({
   default: ""
 })
 
-
+export const result = atom({
+  key: "result",
+  default: ""
+})
