@@ -15,21 +15,21 @@ function Signin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -68,41 +68,41 @@ function Signin() {
     >
       <motion.section 
         className='pb-12'
-        variants={fadeIn('down', 0.2)}
+        variants={fadeIn('down', 'tween', 0.2, 0.5)}
       >
         <Nav />
       </motion.section>
       <motion.div 
         className='flex justify-center py-20 pt-36'
-        variants={fadeIn('up', 0.3)}
+        variants={fadeIn('up', 'tween', 0.3, 0.5)}
       >
         <motion.div 
           className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 p-5 shadow-2xl mt-10 rounded-lg"
-          variants={fadeIn('up', 0.4)}
+          variants={fadeIn('up', 'tween', 0.4, 0.5)}
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <div className="space-y-2">
             <motion.div 
               className='flex flex-col px-10 py-10'
-              variants={fadeIn('up', 0.5)}
+              variants={fadeIn('up', 'tween', 0.5, 0.5)}
             >
               <motion.h3 
                 className='flex justify-center text-coral-red text-4xl font-bold'
-                variants={fadeIn('up', 0.6)}
+                variants={fadeIn('up', 'tween', 0.6, 0.5)}
               >
                 Sign In
               </motion.h3>
               <motion.p 
                 className='flex justify-center mt-4 text-gray-500 text-xl'
-                variants={fadeIn('up', 0.7)}
+                variants={fadeIn('up', 'tween', 0.7, 0.5)}
               >
                 Enter your credentials to login
               </motion.p>
 
               <motion.p 
                 className='mt-5 font-bold text-lg'
-                variants={fadeIn('up', 0.8)}
+                variants={fadeIn('up', 'tween', 0.8, 0.5)}
               >
                 Email
               </motion.p>
@@ -117,13 +117,13 @@ function Signin() {
                   setError('');
                 }}
                 className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
-                variants={fadeIn('up', 0.9)}
+                variants={fadeIn('up', 'tween', 0.9, 0.5)}
                 whileFocus={{ scale: 1.02 }}
               />
 
               <motion.p 
                 className='mt-5 font-bold text-lg'
-                variants={fadeIn('up', 1)}
+                variants={fadeIn('up', 'tween', 1, 0.5)}
               >
                 Password
               </motion.p>
@@ -137,7 +137,7 @@ function Signin() {
                   setError('');
                 }}
                 className='w-full border border-gray-300 h-10 mt-3 rounded-lg p-2'
-                variants={fadeIn('up', 1.1)}
+                variants={fadeIn('up', 'tween', 1.1, 0.5)}
                 whileFocus={{ scale: 1.02 }}
               />
               {error && (
@@ -155,7 +155,7 @@ function Signin() {
                 onClick={() => handleSignIn(email, password)}
                 className='mt-5 bg-white text-coral-red border border-coral-red hover:text-white 
                 hover:bg-coral-red font-bold text-xl h-12 rounded-lg'
-                variants={fadeIn('up', 1.2)}
+                variants={fadeIn('up', 'tween', 1.2, 0.5)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -163,7 +163,7 @@ function Signin() {
               </motion.button>
               <motion.div 
                 className='flex flex-row mt-4 justify-center gap-1'
-                variants={fadeIn('up', 1.3)}
+                variants={fadeIn('up', 'tween', 1.3, 0.5)}
               >
                 <p>Don't have an account?</p>
                 <motion.button
@@ -181,7 +181,7 @@ function Signin() {
       </motion.div>
       <motion.section 
         className="padding-x padding-t pb-8 bg-black"
-        variants={fadeIn('up', 1.4)}
+        variants={fadeIn('up', 'tween', 1.4, 0.5)}
       >
         <Footer />
       </motion.section>

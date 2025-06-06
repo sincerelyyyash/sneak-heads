@@ -8,21 +8,21 @@ const PopularProducts = () => {
   const productsData = useRecoilValue(productDetails); 
   const products = productsData.data;
 
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -46,11 +46,11 @@ const PopularProducts = () => {
       <section id="products" className="max-container max-sm:mt-12">
         <motion.div 
           className="flex flex-row justify-between"
-          variants={fadeIn('up', 0.2)}
+          variants={fadeIn('up', 'tween', 0.1, 0.4)}
         >
           <motion.div 
             className="flex flex-col justify-start gap-5"
-            variants={fadeIn('right', 0.3)}
+            variants={fadeIn('right', 'tween', 0.2, 0.4)}
           >
             <h2 className="text-4xl font-palanquin font-bold">
               Our <span className="text-coral-red">Popular</span> Products
@@ -62,7 +62,7 @@ const PopularProducts = () => {
             </p>
           </motion.div>
           <motion.div
-            variants={fadeIn('left', 0.3)}
+            variants={fadeIn('left', 'tween', 0.2, 0.4)}
           >
             <a href="/products">
               <div className="flex flex-row justify-center items-center">
@@ -82,13 +82,13 @@ const PopularProducts = () => {
         </motion.div>
 
         <motion.div 
-          className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-14"
+          className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-14"
           variants={staggerContainer(0.2, 0.1)}
         >
           {products.slice(0, 4).map((product) => (
             <motion.div
               key={product._id}
-              variants={fadeIn('up', 0.2)}
+              variants={fadeIn('up', 'tween', 0.2, 0.4)}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >

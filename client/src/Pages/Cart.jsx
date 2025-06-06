@@ -22,21 +22,21 @@ function Cart() {
   const isEmpty = cart.length === 0;
   const navigate = useNavigate();
 
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -60,12 +60,12 @@ function Cart() {
       <Nav />
       <motion.div 
         className='py-20 pt-40'
-        variants={fadeIn('up', 0.2)}
+        variants={fadeIn('up', 'tween', 0.2, 0.4)}
       >
         {isEmpty ? (
           <motion.div 
             className="flex justify-center items-center h-screen flex-col"
-            variants={fadeIn('up', 0.3)}
+            variants={fadeIn('up', 'tween', 0.3, 0.4)}
           >
             <p className="text-3xl font-montserrat text-gray-500">Your cart is empty ;(</p>
             <motion.div
@@ -84,17 +84,17 @@ function Cart() {
         ) : (
           <motion.div 
             className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-            variants={fadeIn('up', 0.2)}
+            variants={fadeIn('up', 'tween', 0.2, 0.4)}
           >
             <motion.p 
               className="text-coral-red text-2xl font-semibold text-left font-montserrat"
-              variants={fadeIn('right', 0.3)}
+              variants={fadeIn('right', 'tween', 0.3, 0.4)}
             >
               Shopping Cart
             </motion.p>
             <motion.div 
               className='flex justify-end mb-4'
-              variants={fadeIn('left', 0.3)}
+              variants={fadeIn('left', 'tween', 0.3, 0.4)}
             >
               <Button 
                 square={true} 
@@ -110,7 +110,7 @@ function Cart() {
               {cart.map((cartItem, index) => (
                 <motion.div
                   key={index}
-                  variants={fadeIn('up', 0.2 * index)}
+                  variants={fadeIn('up', 'tween', 0.2 * index, 0.4)}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
@@ -126,7 +126,7 @@ function Cart() {
             </motion.section>
             <motion.div 
               className='flex justify-end mt-4'
-              variants={fadeIn('up', 0.4)}
+              variants={fadeIn('up', 'tween', 0.4, 0.4)}
             >
               <p className="text-black text-3xl font-semibold text-left font-Palanquin mr-4">Subtotal: </p>
               <p className="text-black text-xl mt-2 font-semibold text-left font-Palanquin">₹</p>
@@ -137,7 +137,7 @@ function Cart() {
       </motion.div>
       <motion.section 
         className="padding-x padding-t pt- pb-8 bg-black"
-        variants={fadeIn('up', 0.5)}
+        variants={fadeIn('up', 'tween', 0.5, 0.4)}
       >
         <Footer />
       </motion.section>

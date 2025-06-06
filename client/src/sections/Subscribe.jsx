@@ -8,21 +8,21 @@ const Subscribe = () => {
     toast.error(message);
   };
 
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -37,14 +37,14 @@ const Subscribe = () => {
     >
       <motion.h3 
         className="text-4xl leading-[68px] lg:max-w-md font-palanquin font-bold"
-        variants={fadeIn('right', 0.2)}
+        variants={fadeIn('right', 'tween', 0.2, 0.4)}
       >
         Sign Up from
         <span className="text-coral-red"> Updates </span>& Newsletter
       </motion.h3>
       <motion.div 
         className="lg:max-w-[40%] w-full flex items-center max-sm:flex-col gap-5 p-2.5 sm:border sm:border-slate-gray rounded-full"
-        variants={fadeIn('left', 0.2)}
+        variants={fadeIn('left', 'tween', 0.2, 0.4)}
       >
         <motion.input 
           type="text" 

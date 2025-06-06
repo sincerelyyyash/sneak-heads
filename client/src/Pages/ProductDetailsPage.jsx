@@ -21,21 +21,21 @@ const ProductDetailsPage = () => {
   const [selectedSize, setSelectedSize] = useState(6); 
   const navigate = useNavigate();
 
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -122,17 +122,17 @@ const ProductDetailsPage = () => {
     >
       <motion.section 
         className='pb-12'
-        variants={fadeIn('down', 0.2)}
+        variants={fadeIn('down', 'tween', 0.2, 0.5)}
       >
         <Nav/>
       </motion.section>
       <motion.div 
         className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 padding flex flex-col lg:flex-row justify-center items-center lg:items-start lg:gap-x-12'
-        variants={fadeIn('up', 0.3)}
+        variants={fadeIn('up', 'tween', 0.3, 0.5)}
       >
         <motion.div 
           className="w-full lg:w-[680px] mb-8 lg:mb-0"
-          variants={fadeIn('right', 0.4)}
+          variants={fadeIn('right', 'tween', 0.4, 0.5)}
         >
           <motion.div 
             className='w-full flex justify-center'
@@ -143,7 +143,7 @@ const ProductDetailsPage = () => {
           </motion.div>
           <motion.div 
             className="flex justify-start"
-            variants={fadeIn('up', 0.5)}
+            variants={fadeIn('up', 'tween', 0.5, 0.5)}
           >
             <ImageOptions
               imgURLs={productDetails.imgURLs}
@@ -154,29 +154,29 @@ const ProductDetailsPage = () => {
         </motion.div>
         <motion.div 
           className="w-full lg:w-full mx-auto lg:mx-0"
-          variants={fadeIn('left', 0.4)}
+          variants={fadeIn('left', 'tween', 0.4, 0.5)}
         >
           <motion.h1 
             className='mt-2 text-4xl leading-normal font-semibold font-palanquin text-black'
-            variants={fadeIn('up', 0.5)}
+            variants={fadeIn('up', 'tween', 0.5, 0.5)}
           >
             {name}
           </motion.h1>
           <motion.p 
             className='mt-4 font-montserrat text-gray-600 lg:max-w-lg'
-            variants={fadeIn('up', 0.6)}
+            variants={fadeIn('up', 'tween', 0.6, 0.5)}
           >
             {description}
           </motion.p>
           <motion.p 
             className="mt-2 font-semibold font-palanquin text-gray-700 text-3xl leading-normal"
-            variants={fadeIn('up', 0.7)}
+            variants={fadeIn('up', 'tween', 0.7, 0.5)}
           >
             ₹ {price}
           </motion.p>
           <motion.div 
             className="mt-4"
-            variants={fadeIn('up', 0.8)}
+            variants={fadeIn('up', 'tween', 0.8, 0.5)}
           >
             <h2 className='font-montserrat text-gray-600'>Quantity: (Max- 10 per order)</h2>
             <div className="flex gap-2 mt-2">
@@ -201,7 +201,7 @@ const ProductDetailsPage = () => {
           </motion.div>
           <motion.div 
             className="mt-4"
-            variants={fadeIn('up', 0.9)}
+            variants={fadeIn('up', 'tween', 0.9, 0.5)}
           >
             <h2 className='font-montserrat text-gray-600'>Size:</h2>
             <div className="flex gap-2 mt-2">
@@ -220,7 +220,7 @@ const ProductDetailsPage = () => {
           </motion.div>
           <motion.div 
             className="mt-11 flex flex-wrap gap-4"
-            variants={fadeIn('up', 1)}
+            variants={fadeIn('up', 'tween', 1, 0.5)}
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -255,7 +255,7 @@ const ProductDetailsPage = () => {
       </motion.div>
       <motion.section 
         className="padding-x padding-t pt-8 pb-8 bg-black"
-        variants={fadeIn('up', 1.1)}
+        variants={fadeIn('up', 'tween', 1.1, 0.5)}
       >
         <Footer/>
       </motion.section>

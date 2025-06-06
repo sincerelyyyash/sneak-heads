@@ -8,21 +8,21 @@ import { useGetProducts } from '../Api/ProductsApi';
 import { fetchUser } from '../Api/UserApi';
 
 // Animation variants
-const fadeIn = (direction, delay) => ({
+const fadeIn = (direction, type, delay, duration) => ({
   hidden: {
-    y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+    x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+    y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
     opacity: 0,
-    x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
   },
   show: {
-    y: 0,
     x: 0,
+    y: 0,
     opacity: 1,
     transition: {
-      type: 'tween',
-      duration: 1.2,
-      delay: delay,
-      ease: [0.25, 0.25, 0.25, 0.75],
+      type,
+      delay,
+      duration: duration || 0.5,
+      ease: 'easeOut',
     },
   },
 });
@@ -46,28 +46,28 @@ function Homepage() {
       <Nav/> 
       <motion.section 
         className="xl:pl-8"
-        variants={fadeIn('up', 0.2)}
+        variants={fadeIn('up', 'tween', 0.1, 0.4)}
       >
         <Hero/>
       </motion.section>
 
       <motion.section 
         className="padding"
-        variants={fadeIn('up', 0.4)}
+        variants={fadeIn('up', 'tween', 0.2, 0.4)}
       >
         <PopularProducts/>
       </motion.section>
 
       <motion.section 
         className="padding"
-        variants={fadeIn('up', 0.6)}
+        variants={fadeIn('up', 'tween', 0.3, 0.4)}
       >
         <SuperQuality/>
       </motion.section>
 
       <motion.section 
         className="padding-x py-10"
-        variants={fadeIn('up', 0.8)}
+        variants={fadeIn('up', 'tween', 0.4, 0.4)}
       >
         <Services/>
       </motion.section>
@@ -78,21 +78,21 @@ function Homepage() {
 
       <motion.section 
         className="padding bg-pale-blue"
-        variants={fadeIn('up', 1)}
+        variants={fadeIn('up', 'tween', 0.5, 0.4)}
       >
         <CustomerReviews/>
       </motion.section>
 
       <motion.section 
         className="padding-x sm:py-32 py-16 w-full"
-        variants={fadeIn('up', 1.2)}
+        variants={fadeIn('up', 'tween', 0.6, 0.4)}
       >
         <Subscribe/>
       </motion.section>
 
       <motion.section 
         className="padding-x padding-t pb-8 bg-black"
-        variants={fadeIn('up', 1.4)}
+        variants={fadeIn('up', 'tween', 0.7, 0.4)}
       >
         <Footer/>
       </motion.section>

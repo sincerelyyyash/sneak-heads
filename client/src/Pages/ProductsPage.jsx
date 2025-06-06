@@ -16,21 +16,21 @@ function ProductsPage(){
   const productsData = useRecoilValue(productDetails); 
   const products = productsData.data;
 
-  const fadeIn = (direction, delay) => ({
+  const fadeIn = (direction, type, delay, duration) => ({
     hidden: {
-      y: direction === 'up' ? 80 : direction === 'down' ? -80 : 0,
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
       opacity: 0,
-      x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
     },
     show: {
-      y: 0,
       x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        type: 'tween',
-        duration: 1.2,
-        delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        type,
+        delay,
+        duration: duration || 0.5,
+        ease: 'easeOut',
       },
     },
   });
@@ -57,24 +57,24 @@ function ProductsPage(){
       </div>
       <motion.div 
         className='p-10 m-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'
-        variants={fadeIn('up', 0.2)}
+        variants={fadeIn('up', 'tween', 0.1, 0.4)}
       >
         <motion.div 
           className="flex flex-col justify-start gap-5 pt-20"
-          variants={fadeIn('up', 0.3)}
+          variants={fadeIn('up', 'tween', 0.2, 0.4)}
         >
           <h2 className="text-4xl font-palanquin font-bold">
             All <span className="text-coral-red">Popular</span> Products
           </h2>
         </motion.div>
         <motion.div 
-          className="mt-16 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 sm:gap-6 gap-14"
-          variants={staggerContainer(0.2, 0.1)}
+          variants={fadeIn('up', 'tween', 0.2, 0.4)}
+          className="mt-16 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-14"
         >
           {products.map((product, index) => (
             <motion.div
               key={product._id}
-              variants={fadeIn('up', 0.2 * index)}
+              variants={fadeIn('up', 'tween', 0.2 * index, 0.4)}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
@@ -88,7 +88,7 @@ function ProductsPage(){
       </motion.div>
       <motion.section 
         className="padding-x padding-t pt- pb-8 bg-black"
-        variants={fadeIn('up', 0.4)}
+        variants={fadeIn('up', 'tween', 0.3, 0.4)}
       >
         <Footer/>
       </motion.section>
